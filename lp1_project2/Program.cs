@@ -16,6 +16,8 @@ namespace lp1_project2
 
             gameSaver.CreateGameSettingsFile(args);
             gameSaver.SaveGame();
+
+            Console.WriteLine(FileReader.ReadFromFile('Z'));
             gameSaver.ClearCurrentGame();
         }
     }

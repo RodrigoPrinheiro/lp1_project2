@@ -110,7 +110,24 @@ namespace lp1_project2
         {
             string cleanString;
             cleanString = str.Trim(new Char[] { ' ', '-' });
-            file.WriteLine(cleanString);
+            if (IsStringDigit(cleanString))
+                file.WriteLine(cleanString);
+            else
+                file.Write(cleanString + " = ");
+
+        }
+
+        private bool IsStringDigit(string str)
+        {
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (char.IsDigit(str[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
