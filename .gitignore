@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Game save files .txt
+**/GameSave.txt
+**/CurrentGameSave.txt

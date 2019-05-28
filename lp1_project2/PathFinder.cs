@@ -2,6 +2,10 @@ using System;
 
 namespace lp1_project2
 {
+    /// <summary>
+    /// Pathfinder class uses a position and searches for the closest path in
+    /// a list of zombies, humans, or positions
+    /// </summary>
     static class PathFinder
     {
         
@@ -93,15 +97,18 @@ namespace lp1_project2
                }
            }
 
-        // Oh? You approaching me?
-        // Instead of running away you're coming right towards me?
-        if(approach) return nextStep;
-        else return new Position(-nextStep.X, -nextStep.Y);
+            // Oh? You approaching me?
+            // Instead of running away you're coming right towards me?
+            if(approach) return nextStep;
+            else return new Position(-nextStep.X, -nextStep.Y);
 
         }
 
         // TODO: possible issue if human runs away next to another zombie? 
         // Not sure if we want to avoid this beahviour
+        // I dont think we do since the agent that will move is picked randomly
+        // and if you pick the closest one then he behaves accordingly for that one
+        // if he ends up closer to a new zombie then fuck it, he put himself in that situation.
 
     }
 }

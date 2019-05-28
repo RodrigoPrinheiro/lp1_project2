@@ -4,30 +4,33 @@ using System.Text;
 
 namespace lp1_project2
 {
+    /// <summary>
+    /// Agent class is the general idea for a basic unit in the game.
+    /// </summary>
     public abstract class Agent : ITaggable
     {
-        // Tag in Hexadecimal
+        // Tag in Hexadecimal. Aka the name of said agent
         public byte Tag { get;}
 
-        // Color to be printed in the board for this agent
-        protected ConsoleColor Faction { get; set; }
+        /// <summary>
+        /// Dictates if this Agent is a Zombie or a Human.
+        /// </summary>
+        public Faction AgentFaction { get; }
 
         // Position of the agent, x,y position
         protected Position position;
 
-        // If they are controllable 
+        /// <summary>
+        /// Read only property that determines if the Agent is controllable.
+        /// </summary>
         protected bool InputControlled { get; }
 
-        public Agent(byte tag, bool input)
+        public Agent(byte tag, bool input, Faction faction)
         {
             Tag = tag;
             InputControlled = input;
+            AgentFaction = faction;
         }
-
-        // Path-finding, uses static Class Path-Finding
-
-        // Movement, uses Path-Finding function
-        public abstract Position Move();
 
         public override string ToString()
         {
