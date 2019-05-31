@@ -22,9 +22,7 @@ namespace lp1_project2
         /// Character of the key in which the value you want to get from the
         /// 'ini' file is tagged.
         /// </param>
-        /// <returns>
-        /// Returns the value of the asked key tag.
-        /// </returns>
+        /// <returns> Returns the value of the asked key tag.</returns>
         public static int ReadFromFile(char key)
         {
             // Variable to save the current line read from the file.

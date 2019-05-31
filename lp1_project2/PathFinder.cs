@@ -10,12 +10,15 @@ namespace lp1_project2
     {
         
         /// <summary>
-        /// Go trough the positions of all the enemies. And return the nearest to the origin point.
+        /// Go trough the positions of all the enemies.
+        /// And return the nearest to the origin point.<br>
         /// This should use the big simulation map
         /// </summary>
         /// <param name="originPoint"> The starting point of the search</param>
-        /// <param name="opponentsList"> The list with all the positions that are potential targets.</param>
-        /// <returns></returns>
+        /// <param name="opponentsList"> 
+        /// The list with all the positions that are potential targets.
+        /// </param>
+        /// <returns>Returns the position of the nearest other</returns>
         public static Position FindNearest(Position originPoint, Position[] opponentsList)       
         {
             Position  NearestEnemy = new Position();
@@ -47,13 +50,20 @@ namespace lp1_project2
         }
 
         /// <summary>
-        /// Evaluate the diferences in coordinates between the origin and the target on each individual axis, and return position diference between the origin and its next logical location.
+        /// Evaluate the diferences in coordinates between the origin
+        /// and the target on each individual axis, 
+        /// and return position diference between the origin
+        /// and its next logical location.
         /// </summary>
         /// <param name="origin">The starting position</param>
-        /// <param name="target">The position of what we want to compare against </param>
-        /// <param name="approach">Whether the agent in the origin wants to approach or run away from the agent in the target position</param>
-        /// <returns></returns>
-        public static Position GetNextStep(Position origin, Position target, bool approach)
+        /// <param name="target">
+        /// The position of what we want to compare against </param>
+        /// <param name="approach">
+        /// Whether the agent in the origin wants to approach or run away from 
+        /// the agent in the target position</param>
+        /// <returns> The next position of the path to take</returns>
+        public static Position GetNextStep
+            (Position origin, Position target, bool approach)
         {
 
             // Will be used as the return. 
@@ -67,45 +77,45 @@ namespace lp1_project2
             // First verify whether the difference in positions is 
             // greater on the X or Y axis.
             // Then check if the target is lower/higher/forwards/backwards
-           if (MathF.Pow(deltaX, 2) > MathF.Pow(deltaY, 2))
-           {
-               if (deltaX > 0) nextStep.X = 1;
-               else if (deltaX < 0) nextStep.X = -1;
-           }
+            if (MathF.Pow(deltaX, 2) > MathF.Pow(deltaY, 2))
+            {
+                if (deltaX > 0) nextStep.X = 1;
+                else if (deltaX < 0) nextStep.X = -1;
+            }
             else if (MathF.Pow(deltaY, 2) > MathF.Pow(deltaX, 2))
-           {
-               if (deltaY > 0) nextStep.Y = 1;
-               else if (deltaY < 0) nextStep.Y = -1;
-           }
+            {
+                if (deltaY > 0) nextStep.Y = 1;
+                else if (deltaY < 0) nextStep.Y = -1;
+            }
 
             // If the difference in the X and Y axis are the same, choose one
             // at random to move in.
-           else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
-           {
-               Random r = new Random();
-               int i = r.Next(2);
+            else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
+            {
+                Random r = new Random();
+                int i = r.Next(2);
 
-               if (deltaX > 0)
-               {
-                   if (i == 0) nextStep.Y = 1;
-                   else if (i == 0) nextStep.X = 1; 
-               }
-               else if (deltaX < 0) 
-               {
+                if (deltaX > 0)
+                {
                     if (i == 0) nextStep.Y = 1;
-                   else if (i == 0) nextStep.X = 1; 
-               }
-           }
+                    else if (i == 0) nextStep.X = 1; 
+                }
+                else if (deltaX < 0) 
+                {
+                     if (i == 0) nextStep.Y = 1;
+                    else if (i == 0) nextStep.X = 1; 
+                }
+            }
 
             // Oh? You approaching me?
             // Instead of running away you're coming right towards me?
             if(approach) return nextStep;
             else return new Position(-nextStep.X, -nextStep.Y);
-
         }
 
         // TODO: possible issue if human runs away next to another zombie? 
-        // Not sure if we want to avoid this beahviour
+        // Not sure if we want to avoid this beahviour.
+
         // I dont think we do since the agent that will move is picked randomly
         // and if you pick the closest one then he behaves accordingly for that one
         // if he ends up closer to a new zombie then fuck it, he put himself in that situation.
