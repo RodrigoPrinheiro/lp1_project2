@@ -9,9 +9,6 @@ namespace lp1_project2
         {
             occupier = null;
             boardPos = new Position(x,y);
-
         }
-
-        
     }
 }

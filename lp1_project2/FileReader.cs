@@ -12,7 +12,7 @@ namespace lp1_project2
     class FileReader
     {
         // File path, doesn't need any more files
-        private const string currentGame = @"CurrentGameSave.txt";
+        private const string currentGame = @"CurrentGameSave.ini";
 
         /// <summary>
         /// Reads from the current game save file and returns the value of a

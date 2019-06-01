@@ -12,8 +12,8 @@ namespace lp1_project2
     class SaveFileManager
     {
         // File paths for the current project folder
-        private const string saveFile = @"GameSave.txt";
-        private const string currentGame = @"CurrentGameSave.txt";
+        private const string saveFile = @"GameSave.ini";
+        private const string currentGame = @"CurrentGameSave.ini";
 
         /// <summary>
         /// Dictates if the player is using a save file or not
@@ -78,11 +78,6 @@ namespace lp1_project2
             // If it should save the game check if there is a file to save to.
             if (shouldSaveGame)
             {
-                if (File.Exists(currentGame) && !File.Exists(saveFile))
-                {
-                    File.Create(saveFile);
-                }
-
                 File.Copy(currentGame, saveFile, true);
             }
         }

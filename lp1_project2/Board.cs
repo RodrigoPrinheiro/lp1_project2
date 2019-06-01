@@ -4,7 +4,7 @@ using System;
 namespace lp1_project2
 {
     /// <summary>
-    /// Base class for the game board, controlls the tiles and the place the
+    /// Base class for the game board, controls the tiles and the place the
     /// pieces, making sure they have their correct positions considering the
     /// simulation
     /// </summary>
@@ -31,7 +31,7 @@ namespace lp1_project2
 
                 !   The conversion might not be strictly necessary, by just
                     using positions like we've done bellow and in pathfidner.cs
-                    this method theoreticaly  creates and "infinite" simulation
+                    this method theoretically  creates and "infinite" simulation
                     space and kinda doesn't need to be put in the original map.
 
                     Dunno how the renderer would deal with that tough.
@@ -60,7 +60,7 @@ namespace lp1_project2
         public List<Zombie> zombiesList;
 
         /// <summary>
-        /// Base class for the game board, controlls the tiles and the place the
+        /// Base class for the game board, controls the tiles and the place the
         /// pieces, making sure they have their correct positions 
         /// considering the simulation
         /// </summary>
@@ -70,8 +70,12 @@ namespace lp1_project2
         /// </param>
         /// <param name="nH"> Starting number of Human agents on the board
         /// </param>
-        /// <param name="controllableZ"> Number of Zombies controllable by player input </param>
-        /// <param name="controllableH"> Number of Zombies controllable by player input </param>
+        /// <param name="controllableZ">
+        /// Number of Zombies controllable by player input
+        /// </param>
+        /// <param name="controllableH"> 
+        /// Number of Zombies controllable by player input 
+        /// </param>
         public Board(int width, int height, int nZ, int nH, int controllableZ, int controllableH)
         {
 
