@@ -4,8 +4,17 @@ using System.Text;
 
 namespace lp1_project2
 {
-    static class Shuffler
+    /// <summary>
+    /// Shuffler class that contains generic static shuffle functions for 
+    /// any required collection to shuffle.
+    /// </summary>
+    static class Shuffle
     {
+        /// <summary>
+        /// Shuffles the objects of a defined type T List-able.
+        /// </summary>
+        /// <typeparam name="T"> Type of the list to be shuffled</typeparam>
+        /// <param name="list"> List to be shuffled</param>
         public static void ShuffleList<T>(IList<T> list)
         {
             Random r = new Random();
