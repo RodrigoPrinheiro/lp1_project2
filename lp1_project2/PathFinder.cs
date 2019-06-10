@@ -88,9 +88,9 @@ namespace lp1_project2
                 else if (deltaY < 0) nextStep.Y = -1;
             }
 
-            // If the difference in the X and Y axis are the same, 
-            // move diagonaly
-            // use CompareTo do decide what direction in specific.
+           // If the difference in the X and Y axis are the same, 
+           // move diagonaly
+           // use CompareTo do decide what direction in specific.
            else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
            {
                nextStep.X = 1 * target.X.CompareTo(origin.X);

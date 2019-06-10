@@ -48,7 +48,8 @@ namespace lp1_project2
         // Width and Height of the real board, shown on screen.
         public int Width {get; private set;}
         public int Height {get; private set;}
-        Tile[,] realBoard;
+
+        public Tile[,] realBoard;
 
         // Dictionary that stores each agent on either faction as keys
         // and then its 5 positions (its real positions and 4 simulated ones)
