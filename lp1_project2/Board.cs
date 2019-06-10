@@ -166,7 +166,7 @@ namespace lp1_project2
         {
 
 
-            Position[] simPos = new Position[5];
+            Position[] simPos = new Position[9];
 
             if(faction == Faction.Human)
             {
@@ -178,11 +178,19 @@ namespace lp1_project2
                     simPos[1] = 
                     new Position(h.position.X + Width, h.position.Y);
                     simPos[2] = 
-                    new Position(h.position.X, h.position.Y - Height);
+                    new Position(h.position.X + Width, h.position.Y - Height);
                     simPos[3] = 
-                    new Position(h.position.X - Width, h.position.Y);
+                    new Position(h.position.X, h.position.Y - Height);
                     simPos[4] = 
+                    new Position(h.position.X - Width, h.position.Y - Height);
+                    simPos[5] =
+                    new Position(h.position.X - Width, h.position.Y);
+                    simPos[6] =
+                    new Position(h.position.X - Width, h.position.Y + Height);
+                    simPos[7] =
                     new Position(h.position.X, h.position.Y + Height);
+                    simPos[8] =
+                    new Position(h.position.X + Width, h.position.Y + Height);
 
                     humanSimPositions.Add(h, simPos);
 
@@ -199,16 +207,30 @@ namespace lp1_project2
                     simPos[1] = 
                     new Position(z.position.X + Width, z.position.Y);
                     simPos[2] = 
-                    new Position(z.position.X, z.position.Y - Height);
+                    new Position(z.position.X + Width, z.position.Y - Height);
                     simPos[3] = 
-                    new Position(z.position.X - Width, z.position.Y);
+                    new Position(z.position.X, z.position.Y - Height);
                     simPos[4] = 
+                    new Position(z.position.X - Width, z.position.Y - Height);
+                    simPos[5] =
+                    new Position(z.position.X - Width, z.position.Y);
+                    simPos[6] =
+                    new Position(z.position.X - Width, z.position.Y + Height);
+                    simPos[7] =
                     new Position(z.position.X, z.position.Y + Height);
+                    simPos[8] =
+                    new Position(z.position.X + Width, z.position.Y + Height);
 
                     zombieSimPositions.Add(z, simPos);
 
                 }
             }
+
+        }
+
+        void PopulateTiles()
+        {
+
 
 
 
