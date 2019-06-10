@@ -88,24 +88,14 @@ namespace lp1_project2
                 else if (deltaY < 0) nextStep.Y = -1;
             }
 
-            // If the difference in the X and Y axis are the same, choose one
-            // at random to move in.
-            else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
-            {
-                Random r = new Random();
-                int i = r.Next(2);
-
-                if (deltaX > 0)
-                {
-                    if (i == 0) nextStep.Y = 1;
-                    else if (i == 0) nextStep.X = 1; 
-                }
-                else if (deltaX < 0) 
-                {
-                     if (i == 0) nextStep.Y = 1;
-                    else if (i == 0) nextStep.X = 1; 
-                }
-            }
+            // If the difference in the X and Y axis are the same, 
+            // move diagonaly
+            // use CompareTo do decide what direction in specific.
+           else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
+           {
+               nextStep.X = 1 * target.X.CompareTo(origin.X);
+               nextStep.Y = 1 * target.Y.CompareTo(origin.Y);
+           }
 
             // Oh? You approaching me?
             // Instead of running away you're coming right towards me?
