@@ -18,5 +18,27 @@ namespace lp1_project2
             this.Y = y;
         }
 
+        public override string ToString() => $"Position: ({this.X},{this.Y})";
+ 
+        public static Position operator +(Position p1, Position p2)
+        {
+            Position temp = new Position();
+            temp.X = p1.X + p2.X;
+            temp.Y = p1.Y + p2.Y;
+
+            return temp;
+
+        }
+
+        public static Position operator -(Position p1, Position p2)
+        {
+            Position temp = new Position();
+            temp.X = p1.X - p2.X;
+            temp.Y = p1.Y - p2.Y;
+
+            return temp;
+
+        }
+
     }
 }
