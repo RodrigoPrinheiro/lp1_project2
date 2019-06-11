@@ -34,6 +34,12 @@ namespace lp1_project2
             // Build the board
             board = new Board(width, height, nZ, nH, controllableZ, controllableH);
         }
+
+        /// <summary>
+        /// Starts up the file system, clears any current game files.
+        /// </summary>
+        /// <param name="args"> 
+        /// Parameters passed in Main to be written in the save files</param>
         private void GameSaverStartUp(string[] args)
         {
             Render.Board(board.realBoard);
@@ -42,6 +48,9 @@ namespace lp1_project2
             gameSaver.SaveGame();
         }
 
+        /// <summary>
+        /// Function called on Program class in Main to run the game
+        /// </summary>
         public void Run()
         {
             // Reads any value with a given char KEY from the current game state
@@ -49,6 +58,29 @@ namespace lp1_project2
 
             // Deletes the current game file for another game, ends game
             gameSaver.ClearCurrentGame();
+        }
+
+        /// <summary>
+        /// Main loop of the game
+        /// </summary>
+        private void GameLoop()
+        {
+            while (true)
+            {
+
+                Continue();
+                if (Console.ReadKey().Key == ConsoleKey.Escape) break;
+            }
+        }
+
+        /// <summary>
+        /// Quality of life method so Console.WriteLine isn't repeated multiple
+        /// times
+        /// </summary>
+        private void Continue()
+        {
+            Console.WriteLine("Press <Enter> to continue...");
+            Console.ReadKey();
         }
     }
 }

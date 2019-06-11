@@ -158,8 +158,6 @@ namespace lp1_project2
                 counter ++;
 
             }
-
-
         }
 
         /// <summary>
