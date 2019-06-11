@@ -53,7 +53,7 @@ namespace lp1_project2
         /// <param name="target">The position of what we want to compare against </param>
         /// <param name="approach">Whether the agent in the origin wants to approach or run away from the agent in the target position</param>
         /// <returns></returns>
-        public static Position GetNextStep(Position origin, Position target, bool approach)
+        public static Position GetNextStepTowards(Position origin, Position target)
         {
 
             // Will be used as the return. 
@@ -89,8 +89,7 @@ namespace lp1_project2
 
             // Oh? You approaching me?
             // Instead of running away you're coming right towards me?
-            if(approach) return nextStep;
-            else return new Position(-nextStep.X, -nextStep.Y);
+            return nextStep;
 
         }
 
