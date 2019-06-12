@@ -18,7 +18,7 @@ namespace lp1_project2
         public Faction AgentFaction { get; }
 
         // Position of the agent, x,y position
-        public Position position {get; protected set;}
+        public Position position {get;  set;}
 
         /// <summary>
         /// Read only property that determines if the Agent is controllable.
