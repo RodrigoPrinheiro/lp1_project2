@@ -1,57 +1,62 @@
 ﻿using System;
-using static System.Net.Mime.MediaTypeNames;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp1
+namespace lp1_project2
 {
-    class Program
+    class MainMenu
     {
-        static void Main(string[] args)
+        static void Menu(string[] args)
         {
 
 
+
             bool isValid = true;
-            bool GMods = true;
+            bool GMods = false;
+
 
             while (isValid)
             {
-                string a = Console.ReadLine().ToUpper();//evitar erros
-                char option = char.Parse(a);
 
                 Console.WriteLine("Welcome to the Humans VS Zombiess \nWhat you " +
-                    $"want to do? \n '1': PLAY \n '2': HELP \n '3': QUIT");
+                    $"want to do? \n 'P': PLAY \n 'H': HELP \n 'Q': QUIT");
+                string a = Console.ReadLine().ToUpper();//evitar erros
+                char option = char.Parse(a);
 
                 switch (option)
                 {
                     case 'P'://Play
                         Console.WriteLine("You choose the Play option");
-                        break;
-
+                        return;
 
                     case 'H'://Help
+
+                        GMods = true;
                         while (GMods)
                         {
+
+
                             Console.WriteLine("What kind of help do you need? \n" +
-                            "'1':What kind of GameMoods exists?\n" +
-                            "'2':What kind of actions/moves can i do?\n");
-
-
-                            switch (option)//gameMoods
+                            "'O':What kind of GameMoods exists?\n" +
+                            "'P':What kind of actions/moves can i do?\n" +
+                            "'W':How can I win?\n" +
+                            "'Q':Return to the MainMenu\n");
+                            string b = Console.ReadLine().ToUpper();//evitar erros
+                            char option2 = char.Parse(b);
+                            switch (option2)//gameMoods
                             {
                                 case 'O'://automatic
                                     Console.WriteLine("Automatic:\nThe game runs" +
                                         "alone, with a need of agent control from" +
                                         "the user. Its just like a spectator mod for" +
                                         "the user.");
-                                    break;
-
-                                case 'I'://interactiv
+                                    Console.WriteLine();
+                                    //interactiv
                                     Console.WriteLine("Interactiv:\nEverytime the " +
                                         "Agent is called to play, the system will" +
                                         "wait for the Input from the user.\n If at" +
                                         "anytime there is no Agents controlled by" +
-                                        "the user, the game goes automatic till the end.");
+                                        "the user, the game goes automatic till the end.\n");
                                     break;
 
                                 case 'P'://actions
@@ -73,7 +78,7 @@ namespace ConsoleApp1
                                         "need to survive till the last Turn.");
                                     break;
 
-                                case 'E'://quit
+                                case 'Q'://quit
                                     GMods = false;
                                     break;
 
@@ -82,23 +87,27 @@ namespace ConsoleApp1
                                     break;
 
                             }
+
                         }
                         break;
 
                     case 'C'://credits
-                        Console.WriteLine();//complete
+                        Console.WriteLine("Rafael Silva - a21805637");//complete
                         break;
+
                     case 'Q'://Quit
 
                         Console.WriteLine("Are you sure you want to quit?\n" +
-                            "'1': Yes \n '2': No, i'm sorry...");
-                        switch (option)
+                            "'Q': Yes \n 'S': No, i'm sorry...");
+                        string c = Console.ReadLine().ToUpper();//avoid errors
+                        char option3 = char.Parse(c);
+                        switch (option3)
                         {
-                            case 'Q'://sair
+                            case 'Q'://leave
                                 Environment.Exit(0);
                                 break;
-                            case 'S'://ficar
-                                break;
+                            case 'S'://stay
+                                continue;
                         }
                         break;
 
