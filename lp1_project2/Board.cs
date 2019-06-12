@@ -48,8 +48,7 @@ namespace lp1_project2
         // Width and Height of the real board, shown on screen.
         public int Width {get; private set;}
         public int Height {get; private set;}
-
-        public Tile[,] realBoard;
+        public Tile[,] realBoard {get; private set;}
 
         // Dictionary that stores each agent on either faction as keys
         // and then its 5 positions (its real positions and 4 simulated ones)
@@ -59,6 +58,7 @@ namespace lp1_project2
 
         public List<Human> humansList;
         public List<Zombie> zombiesList;
+        public List<Agent> agentsList;
 
         /// <summary>
         /// Base class for the game board, controls the tiles and the place the
@@ -85,6 +85,7 @@ namespace lp1_project2
 
             humansList = new List<Human>();
             zombiesList = new List<Zombie>();
+            agentsList = new List<Agent>();
 
             realBoard = new Tile[width, height];
             for(int x = 0; x < realBoard.GetLength(0); x++)
@@ -100,7 +101,10 @@ namespace lp1_project2
 
             zombiesList = MakeAgentList(nZ, controllableZ, Faction.Zombie) as List<Zombie>;
 
-            humansList = MakeAgentList(nH, controllableH, Faction.Human) as List<Human>;      
+            humansList = MakeAgentList(nH, controllableH, Faction.Human) as List<Human>;  
+
+            agentsList.AddRange(zombiesList);
+            agentsList.AddRange(humansList);    
 
             UpdateSimPositionsDictionary(Faction.Human);
             UpdateSimPositionsDictionary(Faction.Zombie);
@@ -129,7 +133,7 @@ namespace lp1_project2
                 newPos.X = rX.Next(0,realBoard.GetLength(0));
                 newPos.Y = rY.Next(0, realBoard.GetLength(1));
 
-                if(realBoard[newPos.X, newPos.Y] == null)
+                if(realBoard[newPos.X, newPos.Y].occupier == null)
                 {
                     if (faction == Faction.Human) 
                     {
@@ -165,11 +169,11 @@ namespace lp1_project2
         /// /(their position on the real board and the 4 simulated for pathfinding)
         /// </summary>
         /// <param name="faction"> Fill in the zombie or human Dictionary? </param>
-        void UpdateSimPositionsDictionary(Faction faction)
+        public void UpdateSimPositionsDictionary(Faction faction)
         {
 
 
-            Position[] simPos = new Position[5];
+            Position[] simPos = new Position[9];
 
             if(faction == Faction.Human)
             {
@@ -181,11 +185,19 @@ namespace lp1_project2
                     simPos[1] = 
                     new Position(h.position.X + Width, h.position.Y);
                     simPos[2] = 
-                    new Position(h.position.X, h.position.Y - Height);
+                    new Position(h.position.X + Width, h.position.Y - Height);
                     simPos[3] = 
-                    new Position(h.position.X - Width, h.position.Y);
+                    new Position(h.position.X, h.position.Y - Height);
                     simPos[4] = 
+                    new Position(h.position.X - Width, h.position.Y - Height);
+                    simPos[5] =
+                    new Position(h.position.X - Width, h.position.Y);
+                    simPos[6] =
+                    new Position(h.position.X - Width, h.position.Y + Height);
+                    simPos[7] =
                     new Position(h.position.X, h.position.Y + Height);
+                    simPos[8] =
+                    new Position(h.position.X + Width, h.position.Y + Height);
 
                     humanSimPositions.Add(h, simPos);
 
@@ -202,18 +214,51 @@ namespace lp1_project2
                     simPos[1] = 
                     new Position(z.position.X + Width, z.position.Y);
                     simPos[2] = 
-                    new Position(z.position.X, z.position.Y - Height);
+                    new Position(z.position.X + Width, z.position.Y - Height);
                     simPos[3] = 
-                    new Position(z.position.X - Width, z.position.Y);
+                    new Position(z.position.X, z.position.Y - Height);
                     simPos[4] = 
+                    new Position(z.position.X - Width, z.position.Y - Height);
+                    simPos[5] =
+                    new Position(z.position.X - Width, z.position.Y);
+                    simPos[6] =
+                    new Position(z.position.X - Width, z.position.Y + Height);
+                    simPos[7] =
                     new Position(z.position.X, z.position.Y + Height);
+                    simPos[8] =
+                    new Position(z.position.X + Width, z.position.Y + Height);
 
                     zombieSimPositions.Add(z, simPos);
 
                 }
             }
 
+        }
 
+        public void PopulateTiles()
+        {
+            Position newPos = new Position();
+   
+            foreach(Agent a in agentsList)
+            {
+                int x = a.position.X;
+                int y = a.position.Y;
+                
+                 // Validate all positions
+                if(x < 0) newPos.X = -x;
+                if(y < 0) newPos.Y = -y;
+
+                if(x > Width) newPos.X = x - Width;
+                if(y > Height) newPos.Y = y -Height;
+
+                a.position = newPos;
+
+                //Place them on tiles on the real board
+
+                realBoard[x,y].occupier = a;
+
+
+            }
 
         }
 
