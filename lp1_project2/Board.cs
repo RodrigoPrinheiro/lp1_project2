@@ -98,17 +98,22 @@ namespace lp1_project2
 
             }
 
-            //zombiesList = MakeAgentList<Zombie>(nZ, controllableZ, Faction.Zombie);
+            // Make the seperate zombie and human lists
             zombiesList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
-
-            //humansList = MakeAgentList<Human>(nH, controllableH, Faction.Human) 
             humansList.AddRange(MakeAgentList<Human>(nH, controllableH));
 
+            // join them in one big list
             agentsList.AddRange(zombiesList);
-            agentsList.AddRange(humansList);    
+            agentsList.AddRange(humansList);   
 
+            // Populate the Tiles
+            PopulateTiles();
+
+
+            // Update all the positions to be useable by the simulation 
             UpdateSimPositionsDictionary(Faction.Human);
             UpdateSimPositionsDictionary(Faction.Zombie);
+
 
 
         }
