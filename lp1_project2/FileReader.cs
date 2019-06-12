@@ -12,7 +12,7 @@ namespace lp1_project2
     class FileReader
     {
         // File path, doesn't need any more files
-        private const string currentGame = @"CurrentGameSave.ini";
+        private const string currentGame = @"CurrentGameSave.txt";
 
         /// <summary>
         /// Reads from the current game save file and returns the value of a
@@ -42,7 +42,6 @@ namespace lp1_project2
                         keyValue = line.Trim(new char[] { ' ', '=', key });
                         return Convert.ToInt32(keyValue);
                     }
-                    else keyValue = "0";
                 }
             }
 

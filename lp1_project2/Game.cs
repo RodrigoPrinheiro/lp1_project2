@@ -19,8 +19,8 @@ namespace lp1_project2
             gameSaver = new SaveFileManager
                 (Console.ReadLine().Equals("Y") ? true : false);
 
-            GameSaverStartUp(args);
-
+            gameSaver.CreateGameSettingsFile(args);
+            gameSaver.SaveGame();
             // Get all values from the current game file
             int width, height, nZ, nH, controllableZ, controllableH;
             width = FileReader.GetValue('x');
@@ -30,22 +30,13 @@ namespace lp1_project2
             controllableZ = FileReader.GetValue('Z');
             controllableH = FileReader.GetValue('H');
             turns = FileReader.GetValue('t');
-
+            
+            // DEBUG
+            Console.WriteLine($"{width}\n{height}\n{nZ}\n{nH}\n{controllableZ}\n{controllableH}");
+            // DEBUG
+            
             // Build the board
             board = new Board(width, height, nZ, nH, controllableZ, controllableH);
-        }
-
-        /// <summary>
-        /// Starts up the file system, clears any current game files.
-        /// </summary>
-        /// <param name="args"> 
-        /// Parameters passed in Main to be written in the save files</param>
-        private void GameSaverStartUp(string[] args)
-        {
-            Render.Board(board.realBoard);
-            // This method asks if the player wants to save the game and then
-            // saves it if that's the case
-            gameSaver.SaveGame();
         }
 
         /// <summary>

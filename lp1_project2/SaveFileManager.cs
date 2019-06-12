@@ -12,8 +12,8 @@ namespace lp1_project2
     class SaveFileManager
     {
         // File paths for the current project folder
-        private const string saveFile = @"GameSave.ini";
-        private const string currentGame = @"CurrentGameSave.ini";
+        private const string saveFile = @"GameSave.txt";
+        private const string currentGame = @"CurrentGameSave.txt";
 
         /// <summary>
         /// Dictates if the player is using a save file or not

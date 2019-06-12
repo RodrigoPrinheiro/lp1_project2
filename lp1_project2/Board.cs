@@ -101,7 +101,12 @@ namespace lp1_project2
 
             zombiesList = MakeAgentList(nZ, controllableZ, Faction.Zombie) as List<Zombie>;
 
-            humansList = MakeAgentList(nH, controllableH, Faction.Human) as List<Human>;  
+            humansList = MakeAgentList(nH, controllableH, Faction.Human) as List<Human>;
+
+            // DEBUG
+            Console.WriteLine(zombiesList);
+            Console.WriteLine(humansList);
+            // DEBUG
 
             agentsList.AddRange(zombiesList);
             agentsList.AddRange(humansList);    
@@ -109,7 +114,7 @@ namespace lp1_project2
             UpdateSimPositionsDictionary(Faction.Human);
             UpdateSimPositionsDictionary(Faction.Zombie);
 
-
+            PopulateTiles();
         }
 
         /// <summary>
@@ -156,7 +161,6 @@ namespace lp1_project2
                     }
 
                 }
-                else continue;
 
                 ctrlCounter++;
                 counter ++;
@@ -256,8 +260,6 @@ namespace lp1_project2
                 //Place them on tiles on the real board
 
                 realBoard[x,y].occupier = a;
-
-
             }
 
         }
