@@ -83,6 +83,9 @@ namespace lp1_project2
             zombiesList = new List<Zombie>();
             agentsList = new List<Agent>();
 
+            humanSimPositions = new Dictionary<Human, Position[]>();
+            zombieSimPositions = new Dictionary<Zombie, Position[]>();
+
             realBoard = new Tile[width, height];
             for(int x = 0; x < realBoard.GetLength(0); x++)
             {
@@ -95,9 +98,11 @@ namespace lp1_project2
 
             }
 
-            zombiesList = MakeAgentList(nZ, controllableZ, Faction.Zombie) as List<Zombie>;
+            //zombiesList = MakeAgentList<Zombie>(nZ, controllableZ, Faction.Zombie);
+            zombiesList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
 
-            humansList = MakeAgentList(nH, controllableH, Faction.Human) as List<Human>;  
+            //humansList = MakeAgentList<Human>(nH, controllableH, Faction.Human) 
+            humansList.AddRange(MakeAgentList<Human>(nH, controllableH));
 
             agentsList.AddRange(zombiesList);
             agentsList.AddRange(humansList);    
@@ -115,7 +120,7 @@ namespace lp1_project2
         /// <param name="inputCtrl"> Number of agents controllable by player input</param>
         /// <param name="faction"> Are they human or zombie? </param>
         /// <returns></returns>
-        IEnumerable<Agent> MakeAgentList(int n, int inputCtrl, Faction faction)
+        IEnumerable<T> MakeAgentList<T>(int n, int inputCtrl) where T : Agent
         {
             Position newPos = new Position(0,0);
             Random rX = new Random();
@@ -131,22 +136,22 @@ namespace lp1_project2
 
                 if(realBoard[newPos.X, newPos.Y].occupier == null)
                 {
-                    if (faction == Faction.Human) 
+                    if (typeof(T).Equals(typeof(Human))) 
                     {
                         yield return 
                             new Human(
                                 (byte)rX.Next(), 
                                 newPos,
-                                ctrlCounter < inputCtrl);
+                                ctrlCounter < inputCtrl) as T;
                     }
 
-                    else if(faction == Faction.Zombie)
+                    else if(typeof(T).Equals(typeof(Zombie)))
                     {
                         yield return 
                             new Zombie(
                                 (byte)rX.Next(), 
                                 newPos,
-                                ctrlCounter < inputCtrl);
+                                ctrlCounter < inputCtrl) as T;
 
 
                     }
