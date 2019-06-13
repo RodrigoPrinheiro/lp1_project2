@@ -53,11 +53,11 @@ namespace lp1_project2
         // Dictionary that stores each agent on either faction as keys
         // and then its 5 positions (its real positions and 4 simulated ones)
         // as values for each agent
-        Dictionary<Human, Position[]> humanSimPositions;
-        Dictionary<Zombie, Position[]> zombieSimPositions;
+        public Dictionary<Human, Position[]> humanSimPositions;
+        public Dictionary<Zombie, Position[]> zombieSimPositions;
 
-        public List<Human> humansList;
-        public List<Zombie> zombiesList;
+        List<Human> humansList;
+        List<Zombie> zombiesList;
         public List<Agent> agentsList;
 
         /// <summary>
@@ -102,16 +102,23 @@ namespace lp1_project2
 
             }
 
+
+            // Make the seperate zombie and human lists
             zombiesList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
             humansList.AddRange(MakeAgentList<Human>(nH, controllableH));
 
+            // join them in one big list for the simulator to use in turn order
             agentsList.AddRange(zombiesList);
-            agentsList.AddRange(humansList);    
+            agentsList.AddRange(humansList);   
 
+            // Populate the Tiles
+            PopulateTiles();
+
+
+            // Update all the positions to be useable by the simulation 
             UpdateSimPositionsDictionary(Faction.Human);
             UpdateSimPositionsDictionary(Faction.Zombie);
 
-            PopulateTiles();
         }
 
         /// <summary>
@@ -236,33 +243,61 @@ namespace lp1_project2
 
         }
 
+        /// <summary>
+        ///  Convert all agent coords to valid ones, then set the occupiers on
+        ///  all tiles
+        /// </summary>
         public void PopulateTiles()
         {
-            Position newPos = new Position();
-   
+        
             foreach(Agent a in agentsList)
             {
-                int x = a.position.X;
-                int y = a.position.Y;
-                
-                // Validate all positions
-                if(x < 0) newPos.X = -x;
-                if(y < 0) newPos.Y = -y;
 
-                if(x > Width) newPos.X = x - Width;
-                if(y > Height) newPos.Y = y -Height;
-
-                // a.position = newPos;
-
+                a.position = ConvertToRealMapCoords(a.position);
                 //Place them on tiles on the real board
+                realBoard[a.position.X,a.position.Y].occupier = a;
+            }
+
+
+        }
+
+        /// <summary>
+        ///  Converts a Position to coordinates inside the real Board
+        /// \
+        ///  Thus making it fit inside the RealBoard Array of tiles.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public Position ConvertToRealMapCoords(Position p)
+        {
+            Position newPos = p;
+            int x = p.X;
+            int y = p.Y;
+                
+            // Validate all positions
+            if(x < 0) newPos.X = -x;
+            if(y < 0) newPos.Y = -y;
+
+            if(x > Width) newPos.X = x - Width;
+            if(y > Height) newPos.Y = y -Height;
 
                 realBoard[x, y].occupier = a;
             }
 
+
+            return newPos;
+
         }
 
-        // TODO: Convert from simulation coordinates to the real map ones
-        //       to make things easy to render
-
+        /// <summary>
+        ///  Replace Human with Zombie on board
+        /// </summary>
+        /// <param name="h">Human to zombify</param>
+        public void ConvertHuman(Human h) 
+        {
+            humansList.Remove(h);
+            zombiesList.Add(new Zombie(h.Tag, h.position, false));
+        }
     }
+
 }

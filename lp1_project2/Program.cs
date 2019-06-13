@@ -6,8 +6,10 @@ namespace lp1_project2
     {
         static void Main(string[] args)
         {
+
             Game game = new Game(args);
             game.Run();
+
         }
     }
 }

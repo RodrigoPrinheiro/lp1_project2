@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace lp1_project2
 {
@@ -8,44 +9,53 @@ namespace lp1_project2
     /// </summary>
     static class PathFinder
     {
-        
+        //TODO:Update this summary
         /// <summary>
         /// Go trough the positions of all the enemies.
         /// And return the nearest to the origin point.<br>
         /// This should use the big simulation map
         /// </summary>
         /// <param name="originPoint"> The starting point of the search</param>
-        /// <param name="opponentsList"> 
-        /// The list with all the positions that are potential targets.
-        /// </param>
-        /// <returns>Returns the position of the nearest other</returns>
-        public static Position FindNearest(Position originPoint, Position[] opponentsList)       
+        /// <param name="opponentsList"> The list with all the positions that are potential targets.</param>
+        /// <returns></returns>
+        public static KeyValuePair<Agent, Position> FindNearestEnemy<T>(Position originPoint, Dictionary<T, Position[]> enemyDict) where T : Agent      
+
         {
-            Position  NearestEnemy = new Position();
+            Position  nearestEnemyPosition = new Position();
+            Agent nearestEnemyAgent = null;
 
             // Make sure delta'll always be smaller
             float distanceToNearest = float.MaxValue;
 
-            foreach (Position p in opponentsList)
+            // go trough each key in the dictionary
+            // then go trough each Position in the value corresponding 
+            // to that key
+            foreach (T a in enemyDict.Keys)
             {   
-
-                // Distance between 2 points:
-                // x^2 + y^2 = d^2
-                float delta = MathF.Sqrt(
-                MathF.Pow(p.X - originPoint.X, 2) + 
-                MathF.Pow(p.Y - originPoint.Y, 2) );
-
-                // Update the variables to always reflect who's closest
-                // to the origin
-                if (delta < distanceToNearest) 
+                foreach(Position p in enemyDict[a])
                 {
-                    NearestEnemy = p;
-                    distanceToNearest = delta;
+
+                    // Distance between 2 points:
+                    // x^2 + y^2 = d^2
+                    float delta = MathF.Sqrt(
+                        MathF.Pow(p.X - originPoint.X, 2) + 
+                        MathF.Pow(p.Y - originPoint.Y, 2) );
+
+                    // Update the variables to always reflect who's closest
+                    // to the origin
+                    if (delta < distanceToNearest) 
+                    {
+                        nearestEnemyPosition = p;
+                        nearestEnemyAgent = a;
+                        distanceToNearest = delta;
+                    }
+                   
                 }
 
             }
 
-            return NearestEnemy;
+            return 
+            new KeyValuePair<Agent, Position>(nearestEnemyAgent, nearestEnemyPosition);
 
         }
 

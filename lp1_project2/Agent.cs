@@ -7,7 +7,7 @@ namespace lp1_project2
     /// <summary>
     /// Agent class is the general idea for a basic unit in the game.
     /// </summary>
-    public abstract class Agent : ITaggable
+    abstract class Agent : ITaggable
     {
         // Tag in Hexadecimal. Aka the name of said agent
         public byte Tag { get;}
