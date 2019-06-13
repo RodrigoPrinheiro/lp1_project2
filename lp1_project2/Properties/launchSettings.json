@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "lp1_project2": {
+      "commandName": "Project",
+      "commandLineArgs": "-x 20 -y 20 -z 2 -h 2 -H 1 -Z 1"
+    }
+  }
+}

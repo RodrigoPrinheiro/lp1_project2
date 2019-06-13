@@ -9,15 +9,17 @@ namespace lp1_project2
     /// </summary>
     static class PathFinder
     {
-        
+        //TODO:Update this summary
         /// <summary>
-        /// Go trough the positions of all the enemies. And return the nearest to the origin point.
+        /// Go trough the positions of all the enemies.
+        /// And return the nearest to the origin point.<br>
         /// This should use the big simulation map
         /// </summary>
         /// <param name="originPoint"> The starting point of the search</param>
         /// <param name="opponentsList"> The list with all the positions that are potential targets.</param>
         /// <returns></returns>
         public static KeyValuePair<Agent, Position> FindNearestEnemy<T>(Position originPoint, Dictionary<T, Position[]> enemyDict) where T : Agent      
+
         {
             Position  nearestEnemyPosition = new Position();
             Agent nearestEnemyAgent = null;
@@ -47,9 +49,7 @@ namespace lp1_project2
                         nearestEnemyAgent = a;
                         distanceToNearest = delta;
                     }
-
-                    
-
+                   
                 }
 
             }
@@ -60,7 +60,10 @@ namespace lp1_project2
         }
 
         /// <summary>
-        /// Evaluate the diferences in coordinates between the origin and the target on each individual axis, and return position diference between the origin and its next logical location.
+        /// Evaluate the diferences in coordinates between the origin
+        /// and the target on each individual axis, 
+        /// and return position diference between the origin
+        /// and its next logical location.
         /// </summary>
         /// <param name="origin">The starting position</param>
         /// <param name="target">The position of what we want to compare against </param>
@@ -80,20 +83,20 @@ namespace lp1_project2
             // First verify whether the difference in positions is 
             // greater on the X or Y axis.
             // Then check if the target is lower/higher/forwards/backwards
-           if (MathF.Pow(deltaX, 2) > MathF.Pow(deltaY, 2))
-           {
-               if (deltaX > 0) nextStep.X = 1;
-               else if (deltaX < 0) nextStep.X = -1;
-           }
+            if (MathF.Pow(deltaX, 2) > MathF.Pow(deltaY, 2))
+            {
+                if (deltaX > 0) nextStep.X = 1;
+                else if (deltaX < 0) nextStep.X = -1;
+            }
             else if (MathF.Pow(deltaY, 2) > MathF.Pow(deltaX, 2))
-           {
-               if (deltaY > 0) nextStep.Y = 1;
-               else if (deltaY < 0) nextStep.Y = -1;
-           }
+            {
+                if (deltaY > 0) nextStep.Y = 1;
+                else if (deltaY < 0) nextStep.Y = -1;
+            }
 
-            // If the difference in the X and Y axis are the same, 
-            // move diagonaly
-            // use CompareTo do decide what direction in specific.
+           // If the difference in the X and Y axis are the same, 
+           // move diagonaly
+           // use CompareTo do decide what direction in specific.
            else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
            {
                nextStep.X = 1 * target.X.CompareTo(origin.X);
@@ -107,7 +110,8 @@ namespace lp1_project2
         }
 
         // TODO: possible issue if human runs away next to another zombie? 
-        // Not sure if we want to avoid this beahviour
+        // Not sure if we want to avoid this beahviour.
+
         // I dont think we do since the agent that will move is picked randomly
         // and if you pick the closest one then he behaves accordingly for that one
         // if he ends up closer to a new zombie then fuck it, he put himself in that situation.

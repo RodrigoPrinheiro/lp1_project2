@@ -38,6 +38,8 @@ namespace lp1_project2
             // Try/Catch block to debug and save use of files
             try
             {
+                // If is using save, copy the contents into the currentGame
+                // save file
                 if (File.Exists(currentGame) && !UsingSave)
                 {
                     File.Delete(currentGame);
@@ -76,11 +78,6 @@ namespace lp1_project2
             // If it should save the game check if there is a file to save to.
             if (shouldSaveGame)
             {
-                if (File.Exists(currentGame) && !File.Exists(saveFile))
-                {
-                    File.Create(saveFile);
-                }
-
                 File.Copy(currentGame, saveFile, true);
             }
         }
@@ -117,6 +114,11 @@ namespace lp1_project2
 
         }
 
+        /// <summary>
+        /// Checks if a given string contains a digit.
+        /// </summary>
+        /// <param name="str">String on where to search for a digit</param>
+        /// <returns>Returns true if the string contains a digit</returns>
         private bool IsStringDigit(string str)
         {
             for (int i = 0; i < str.Length; i++)
