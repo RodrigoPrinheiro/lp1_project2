@@ -4,7 +4,7 @@ using System;
 namespace lp1_project2
 {
     /// <summary>
-    /// Base class for the game board, controlls the tiles and the place the
+    /// Base class for the game board, controls the tiles and the place the
     /// pieces, making sure they have their correct positions considering the
     /// simulation
     /// </summary>
@@ -31,7 +31,7 @@ namespace lp1_project2
 
                 !   The conversion might not be strictly necessary, by just
                     using positions like we've done bellow and in pathfidner.cs
-                    this method theoreticaly  creates and "infinite" simulation
+                    this method theoretically  creates and "infinite" simulation
                     space and kinda doesn't need to be put in the original map.
 
                     Dunno how the renderer would deal with that tough.
@@ -61,7 +61,7 @@ namespace lp1_project2
         public List<Agent> agentsList;
 
         /// <summary>
-        /// Base class for the game board, controlls the tiles and the place the
+        /// Base class for the game board, controls the tiles and the place the
         /// pieces, making sure they have their correct positions 
         /// considering the simulation
         /// </summary>
@@ -71,8 +71,12 @@ namespace lp1_project2
         /// </param>
         /// <param name="nH"> Starting number of Human agents on the board
         /// </param>
-        /// <param name="controllableZ"> Number of Zombies controllable by player input </param>
-        /// <param name="controllableH"> Number of Zombies controllable by player input </param>
+        /// <param name="controllableZ">
+        /// Number of Zombies controllable by player input
+        /// </param>
+        /// <param name="controllableH"> 
+        /// Number of Zombies controllable by player input 
+        /// </param>
         public Board(int width, int height, int nZ, int nH, int controllableZ, int controllableH)
         {
 
@@ -98,10 +102,7 @@ namespace lp1_project2
 
             }
 
-            //zombiesList = MakeAgentList<Zombie>(nZ, controllableZ, Faction.Zombie);
             zombiesList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
-
-            //humansList = MakeAgentList<Human>(nH, controllableH, Faction.Human) 
             humansList.AddRange(MakeAgentList<Human>(nH, controllableH));
 
             agentsList.AddRange(zombiesList);
@@ -110,7 +111,7 @@ namespace lp1_project2
             UpdateSimPositionsDictionary(Faction.Human);
             UpdateSimPositionsDictionary(Faction.Zombie);
 
-
+            PopulateTiles();
         }
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace lp1_project2
         /// <returns></returns>
         IEnumerable<T> MakeAgentList<T>(int n, int inputCtrl) where T : Agent
         {
-            Position newPos = new Position(0,0);
+            Position newPos = new Position();
             Random rX = new Random();
             Random rY = new Random();
 
@@ -157,14 +158,11 @@ namespace lp1_project2
                     }
 
                 }
-                else continue;
 
                 ctrlCounter++;
                 counter ++;
 
             }
-
-
         }
 
         /// <summary>
@@ -247,20 +245,18 @@ namespace lp1_project2
                 int x = a.position.X;
                 int y = a.position.Y;
                 
-                 // Validate all positions
+                // Validate all positions
                 if(x < 0) newPos.X = -x;
                 if(y < 0) newPos.Y = -y;
 
                 if(x > Width) newPos.X = x - Width;
                 if(y > Height) newPos.Y = y -Height;
 
-                a.position = newPos;
+                // a.position = newPos;
 
                 //Place them on tiles on the real board
 
-                realBoard[x,y].occupier = a;
-
-
+                realBoard[x, y].occupier = a;
             }
 
         }
