@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace lp1_project2
 {
@@ -16,28 +17,30 @@ namespace lp1_project2
         /// <param name="originPoint"> The starting point of the search</param>
         /// <param name="opponentsList"> The list with all the positions that are potential targets.</param>
         /// <returns></returns>
-        public static Position FindNearest(Position originPoint, Position[] opponentsList)       
+        public static Position FindNearest(Position originPoint, Dictionary<Agent, Position[]> enemyDict)       
         {
             Position  NearestEnemy = new Position();
 
             // Make sure delta'll always be smaller
             float distanceToNearest = float.MaxValue;
 
-            foreach (Position p in opponentsList)
+            foreach (Position[] pA in enemyDict.Values)
             {   
-
-                // Distance between 2 points:
-                // x^2 + y^2 = d^2
-                float delta = MathF.Sqrt(
-                MathF.Pow(p.X - originPoint.X, 2) + 
-                MathF.Pow(p.Y - originPoint.Y, 2) );
-
-                // Update the variables to always reflect who's closest
-                // to the origin
-                if (delta < distanceToNearest) 
+                foreach(Position p in pA)
                 {
-                    NearestEnemy = p;
-                    distanceToNearest = delta;
+                    // Distance between 2 points:
+                    // x^2 + y^2 = d^2
+                    float delta = MathF.Sqrt(
+                    MathF.Pow(p.X - originPoint.X, 2) + 
+                    MathF.Pow(p.Y - originPoint.Y, 2) );
+
+                    // Update the variables to always reflect who's closest
+                    // to the origin
+                    if (delta < distanceToNearest) 
+                    {
+                        NearestEnemy = p;
+                        distanceToNearest = delta;
+                    }
                 }
 
             }
