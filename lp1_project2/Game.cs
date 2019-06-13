@@ -44,9 +44,7 @@ namespace lp1_project2
         /// </summary>
         public void Run()
         {
-            // Reads any value with a given char KEY from the current game state
-            Console.WriteLine(FileReader.GetValue('Z'));
-
+            Render.Board(board.realBoard);
             // Deletes the current game file for another game, ends game
             gameSaver.ClearCurrentGame();
         }

@@ -15,7 +15,7 @@ namespace lp1_project2
 
         public override string ToString()
         {
-            return $"Pos: {position} \n Controlled: {InputControlled}";
+            return $"{Tag:X2}";
         }
     }
 }

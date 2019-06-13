@@ -102,16 +102,8 @@ namespace lp1_project2
 
             }
 
-            //zombiesList = MakeAgentList<Zombie>(nZ, controllableZ, Faction.Zombie);
             zombiesList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
-
-            //humansList = MakeAgentList<Human>(nH, controllableH, Faction.Human) 
             humansList.AddRange(MakeAgentList<Human>(nH, controllableH));
-
-            // DEBUG
-            Console.WriteLine(zombiesList);
-            Console.WriteLine(humansList);
-            // DEBUG
 
             agentsList.AddRange(zombiesList);
             agentsList.AddRange(humansList);    
@@ -131,7 +123,7 @@ namespace lp1_project2
         /// <returns></returns>
         IEnumerable<T> MakeAgentList<T>(int n, int inputCtrl) where T : Agent
         {
-            Position newPos = new Position(0,0);
+            Position newPos = new Position();
             Random rX = new Random();
             Random rY = new Random();
 
@@ -253,18 +245,18 @@ namespace lp1_project2
                 int x = a.position.X;
                 int y = a.position.Y;
                 
-                 // Validate all positions
+                // Validate all positions
                 if(x < 0) newPos.X = -x;
                 if(y < 0) newPos.Y = -y;
 
                 if(x > Width) newPos.X = x - Width;
                 if(y > Height) newPos.Y = y -Height;
 
-                a.position = newPos;
+                // a.position = newPos;
 
                 //Place them on tiles on the real board
 
-                realBoard[x,y].occupier = a;
+                realBoard[x, y].occupier = a;
             }
 
         }

@@ -34,9 +34,7 @@ namespace lp1_project2
 
         public override string ToString()
         {
-            // return $"{Tag}";
-            // Debugging string
-            return $".";
+            return $"{Tag:X2}";
         }
     }
 }
