@@ -6,6 +6,13 @@ namespace lp1_project2
     {
         static void Main(string[] args)
         {
+            Board b = new Board(20, 30, 10, 12, 2, 0);
+
+            // this prints out a bunch of 0,0 an di'm not sure why?
+            foreach(Agent h in b.agentsList) {Console.WriteLine(h.position);}
+            
+          
+            /* 
             // This is a test
             SaveFileManager gameSaver;
 
@@ -26,7 +33,7 @@ namespace lp1_project2
             Console.WriteLine(FileReader.ReadFromFile('Z'));
 
             // Deletes the current game file for another game
-            gameSaver.ClearCurrentGame();
+            gameSaver.ClearCurrentGame();*/
         }
     }
 }

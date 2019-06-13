@@ -17,35 +17,45 @@ namespace lp1_project2
         /// <param name="originPoint"> The starting point of the search</param>
         /// <param name="opponentsList"> The list with all the positions that are potential targets.</param>
         /// <returns></returns>
-        public static Position FindNearest(Position originPoint, Dictionary<Agent, Position[]> enemyDict)       
+        public static KeyValuePair<Agent, Position> FindNearestEnemy<T>(Position originPoint, Dictionary<T, Position[]> enemyDict) where T : Agent      
         {
-            Position  NearestEnemy = new Position();
+            Position  nearestEnemyPosition = new Position();
+            Agent nearestEnemyAgent = null;
 
             // Make sure delta'll always be smaller
             float distanceToNearest = float.MaxValue;
 
-            foreach (Position[] pA in enemyDict.Values)
+            // go trough each key in the dictionary
+            // then go trough each Position in the value corresponding 
+            // to that key
+            foreach (T a in enemyDict.Keys)
             {   
-                foreach(Position p in pA)
+                foreach(Position p in enemyDict[a])
                 {
+
                     // Distance between 2 points:
                     // x^2 + y^2 = d^2
                     float delta = MathF.Sqrt(
-                    MathF.Pow(p.X - originPoint.X, 2) + 
-                    MathF.Pow(p.Y - originPoint.Y, 2) );
+                        MathF.Pow(p.X - originPoint.X, 2) + 
+                        MathF.Pow(p.Y - originPoint.Y, 2) );
 
                     // Update the variables to always reflect who's closest
                     // to the origin
                     if (delta < distanceToNearest) 
                     {
-                        NearestEnemy = p;
+                        nearestEnemyPosition = p;
+                        nearestEnemyAgent = a;
                         distanceToNearest = delta;
                     }
+
+                    
+
                 }
 
             }
 
-            return NearestEnemy;
+            return 
+            new KeyValuePair<Agent, Position>(nearestEnemyAgent, nearestEnemyPosition);
 
         }
 
