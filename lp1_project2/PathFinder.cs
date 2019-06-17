@@ -30,13 +30,15 @@ namespace lp1_project2
         {
             Agent closestAgent = null;
             double distance;
-            double closestDistance = 0;
+            double closestDistance = 100000;
 
             foreach (Agent a in agentList)
             {
-                if (a != currentAgent)
+                if (a != currentAgent && 
+                    a.AgentFaction != currentAgent.AgentFaction)
                 {
-                    distance = GetToroidalDistance(currentAgent.position, a.position);
+                    distance = GetToroidalDistance
+                        (currentAgent.position, a.position);
 
                     if (closestDistance > distance)
                     {

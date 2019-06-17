@@ -246,9 +246,8 @@ namespace lp1_project2
         /// <summary>
         ///  Usefull for the first run.
         /// </summary>
-        void PopulateTiles()
+        public void PopulateTiles()
         {
-        
             foreach(Agent a in agentsList)
             {
 
