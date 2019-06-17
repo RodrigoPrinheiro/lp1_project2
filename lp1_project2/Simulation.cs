@@ -6,6 +6,7 @@ namespace lp1_project2
 {
     class Simulation
     {
+    
         // Agent selectedAgent = null;
         Board gameBoard;
 

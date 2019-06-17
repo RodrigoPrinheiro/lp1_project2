@@ -10,41 +10,7 @@ namespace lp1_project2
     /// </summary>
     class Board
     {
-            //TODO: update to nopt use the ghost map technique :(
-
-            /*
-                ====THE ANCIENT 4-WAY MAP POSITION SIMULATION TECHNIQUE=====
-
-                Each agent has it's own position, but the board gives it 4 more.
-                That's the positions corresponding to an entire new board,
-                exactly one board of distance away, 
-                in each of the cardinal directions.
-
-                We essentially get the positions of 1 agent in 5 different
-                spots, all with a strict relation to each other.
-
-                The agents and board will use all these locations for 
-                their AI but on-screen it will be presented the real board
-                with the size specified by the user and all agents will be
-                (after every simulation cycle) put into the right 
-                corresponding tile on the real map (that is if they left at all.
-
-                !   The conversion might not be strictly necessary, by just
-                    using positions like we've done bellow and in pathfidner.cs
-                    this method theoretically  creates and "infinite" simulation
-                    space and kinda doesn't need to be put in the original map.
-
-                    Dunno how the renderer would deal with that tough.
-                    So maybe converting would be best anyway.
-
-                                    ¯\_(ツ)_/¯
-
-                ==================ITS JUST WORKS=========================              
-             */
-
-
-
-
+        public int Turns { get; set; }
         // Width and Height of the real board, shown on screen.
         public int Width {get; private set;}
         public int Height {get; private set;}
@@ -75,11 +41,13 @@ namespace lp1_project2
         /// <param name="controllableH"> 
         /// Number of Zombies controllable by player input 
         /// </param>
-        public Board(int width, int height, int nZ, int nH, int controllableZ, int controllableH)
+        public Board(int width, int height, int nZ, int nH, int controllableZ, int controllableH, int turns)
         {
 
             Width = width;
             Height = height;
+
+            Turns = turns;
 
             humansList = new List<Human>();
             zombiesList = new List<Zombie>();
@@ -92,23 +60,14 @@ namespace lp1_project2
                 {
 
                     realBoard[x,y] = new Tile(x,y);
-                    
                 }     
-
             }
-
-
-
-
             // Make the agent list
             agentsList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
             agentsList.AddRange(MakeAgentList<Human>(nH, controllableH));   
 
             // Populate the Tiles
             PopulateTiles();
-
-
-
         }
 
         /// <summary>
@@ -172,8 +131,6 @@ namespace lp1_project2
                 //Place them on tiles on the real board
                 realBoard[a.position.X,a.position.Y].occupier = a;
             }
-
-
         }
 
         /// <summary>
@@ -185,8 +142,6 @@ namespace lp1_project2
             agentsList.Remove(h);
             agentsList.Add(new Zombie(h.Tag, h.position, false));
         }
-
-
     }
 
 }
