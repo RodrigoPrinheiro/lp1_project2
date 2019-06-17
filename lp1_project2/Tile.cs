@@ -1,8 +1,18 @@
 namespace lp1_project2
 {
+    /// <summary>
+    /// Absolute unit of the board.
+    /// </summary>
     sealed class Tile
     {
-        private Position boardPos {get; set;}
+        /// <summary>
+        /// tile's position
+        /// </summary>
+        private Position boardPos {get;}
+
+        /// <summary>
+        /// Current agent that is on this tile.
+        /// </summary>
         public Agent occupier;
 
         public Tile(int x, int y)

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace lp1_project2
 {
+    /// <summary>
+    /// Represents a Human NPC and his respective movement behavior.
+    /// </summary>
     class Human : Agent, IBoardActionable
     {
 
