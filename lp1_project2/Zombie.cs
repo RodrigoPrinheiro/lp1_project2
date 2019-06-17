@@ -12,9 +12,16 @@ namespace lp1_project2
             this.position = position;
         }
 
+
         public void Action(Tile t, Position newPos, Board gameBoard)
         {
-            if(t.occupier == null) position += newPos;
+            if(t.occupier == null) 
+            {
+                gameBoard.realBoard[position.X, position.Y].occupier = null;
+                position += newPos;
+                gameBoard.realBoard[position.X, position.Y].occupier = this;
+                
+            }
             else if(t.occupier.AgentFaction == Faction.Human) 
             {
                 gameBoard.ConvertHuman(t.occupier as Human);

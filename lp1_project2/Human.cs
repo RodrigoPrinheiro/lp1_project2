@@ -18,7 +18,7 @@ namespace lp1_project2
         /// </summary>
         /// <param name="t">realBoard array from Board class</param>
         /// <param name="newPos"> NextStep given by pathfinder</param>
-        public void Action(Tile t, Position newPos)
+        public void Action(Tile t, Position newPos, Board gameB = null)
         {
             if(t.occupier == null) position -= newPos;
 
