@@ -10,7 +10,7 @@ namespace lp1_project2
     /// </summary>
     class Board
     {
-
+            //TODO: update to nopt use the ghost map technique :(
 
             /*
                 ====THE ANCIENT 4-WAY MAP POSITION SIMULATION TECHNIQUE=====
@@ -244,10 +244,9 @@ namespace lp1_project2
         }
 
         /// <summary>
-        ///  Convert all agent coords to valid ones, then set the occupiers on
-        ///  all tiles
+        ///  Usefull for the first run.
         /// </summary>
-        public void PopulateTiles()
+        void PopulateTiles()
         {
         
             foreach(Agent a in agentsList)
@@ -281,7 +280,6 @@ namespace lp1_project2
             if(x > Width) newPos.X = x - Width;
             if(y > Height) newPos.Y = y -Height;
 
-            realBoard[x, y].occupier = a;
             return newPos;
 
         }
@@ -295,6 +293,8 @@ namespace lp1_project2
             humansList.Remove(h);
             zombiesList.Add(new Zombie(h.Tag, h.position, false));
         }
+
+
     }
 
 }
