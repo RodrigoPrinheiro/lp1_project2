@@ -106,6 +106,8 @@ namespace lp1_project2
                         
                     }
 
+                    board.ConvertPositionToBoardCoord(ref newPosition);
+
                     if(a as Human != null) 
                         (a as Human).Action(board.realBoard, newPosition);
                     else if (a as Zombie != null)
@@ -116,9 +118,8 @@ namespace lp1_project2
                 }
 
                 board.Turns--;
-                // Isn't the program supposed to go automaticly if there are no
-                // no controllable agents ?
-                Continue();
+
+                Console.WriteLine("Press <Enter> to continue to the next turn");
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
                 else if (board.Turns <= 0) break;
             }
@@ -132,7 +133,7 @@ namespace lp1_project2
         {
             Console.Clear();
             Render.Board(board.realBoard, currentAgent);
-            Console.WriteLine($"Current NPC moving: {currentAgent.Tag}");
+            Console.WriteLine($"Current NPC moving: {currentAgent.ToString()}");
 
             if (currentAgent.InputControlled)
             {

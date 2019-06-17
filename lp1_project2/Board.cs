@@ -142,6 +142,14 @@ namespace lp1_project2
             agentsList.Remove(h);
             agentsList.Add(new Zombie(h.Tag, h.position, false));
         }
+
+        public Position ConvertPositionToBoardCoord(ref Position pos)
+        {
+            if (pos.X > Width) pos.X = 0;
+            if (pos.Y > Height) pos.Y = 0;
+
+            return pos;
+        }
     }
 
 }
