@@ -10,7 +10,7 @@ namespace lp1_project2
     /// </summary>
     class Board
     {
-
+            //TODO: update to nopt use the ghost map technique :(
 
             /*
                 ====THE ANCIENT 4-WAY MAP POSITION SIMULATION TECHNIQUE=====
