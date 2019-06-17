@@ -46,15 +46,15 @@ namespace lp1_project2
                 }
 
             }
-            else
+            else if(!InputControlled)
             {
                 // Check bounds, send the agent around if bounds are going to be
                 // crossed
-                if (position.X - newPos.X > upperX) newPos.X = -(upperX);
-                else if (position.X - newPos.X < 0) newPos.X = upperX;
+                if (position.X - newPos.X > upperX) newPos.X = (upperX);
+                else if (position.X - newPos.X < 0) newPos.X = -upperX;
 
-                if (position.Y - newPos.Y > upperY) newPos.Y = -(upperY);
-                else if (position.Y - newPos.Y < 0) newPos.Y = upperY;
+                if (position.Y - newPos.Y > upperY) newPos.Y = (upperY);
+                else if (position.Y - newPos.Y < 0) newPos.Y = -upperY;
 
 
                 if (t[position.X - newPos.X, position.Y - newPos.Y].occupier == null)

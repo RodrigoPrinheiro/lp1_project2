@@ -124,8 +124,6 @@ namespace lp1_project2
                 }
 
                 board.Turns--;
-                // Isn't the program supposed to go automaticly if there are no
-                // no controllable agents ?
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
                 else if (board.Turns <= 0) break;
