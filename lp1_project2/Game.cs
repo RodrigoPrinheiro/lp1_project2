@@ -8,7 +8,6 @@ namespace lp1_project2
     {
         private Board board;
         private SaveFileManager gameSaver;
-        private int turns;
 
         public Game(string[] args)
         {
@@ -19,24 +18,40 @@ namespace lp1_project2
             gameSaver = new SaveFileManager
                 (Console.ReadLine().Equals("Y") ? true : false);
 
-            gameSaver.CreateGameSettingsFile(args);
-            gameSaver.SaveGame();
+            foreach (string s in args)
+            {
+                Console.WriteLine($"{s} ");
+            }
+
+            //gameSaver.ReadSave(saveBoard);
+            if (!gameSaver.UsingSave)
+            {
+                BuildBoard(args);
+
+            }
+            //else
+            //{
+            //    if (saveBoard.GameBoard != null)
+            //        board = saveBoard.GameBoard;
+            //    else
+            //        BuildBoard(args);
+            //}
+
+        }
+
+        private void BuildBoard(string[] args)
+        {
             // Get all values from the current game file
-            int width, height, nZ, nH, controllableZ, controllableH;
-            width = FileReader.GetValue('x');
-            height = FileReader.GetValue('y');
-            nZ = FileReader.GetValue('z');
-            nH = FileReader.GetValue('h');
-            controllableZ = FileReader.GetValue('Z');
-            controllableH = FileReader.GetValue('H');
-            turns = FileReader.GetValue('t');
-            
-            // DEBUG
-            Console.WriteLine($"{width}\n{height}\n{nZ}\n{nH}\n{controllableZ}\n{controllableH}");
-            // DEBUG
-            
-            // Build the board
-            board = new Board(width, height, nZ, nH, controllableZ, controllableH);
+            int width, height, nZ, nH, controllableZ, controllableH, turns;
+            width = GetValueFromArgs(args, 'x');
+            height = GetValueFromArgs(args, 'y');
+            nZ = GetValueFromArgs(args, 'z');
+            nH = GetValueFromArgs(args, 'h');
+            controllableZ = GetValueFromArgs(args, 'Z');
+            controllableH = GetValueFromArgs(args, 'H');
+            turns = GetValueFromArgs(args, 't');
+
+            board = new Board(width, height, nZ, nH, controllableZ, controllableH, turns);
         }
 
         /// <summary>
@@ -45,8 +60,6 @@ namespace lp1_project2
         public void Run()
         {
             Render.Board(board.realBoard);
-            // Deletes the current game file for another game, ends game
-            gameSaver.ClearCurrentGame();
         }
 
         /// <summary>
@@ -69,6 +82,19 @@ namespace lp1_project2
         {
             Console.WriteLine("Press <Enter> to continue...");
             Console.ReadKey();
+        }
+
+        private int GetValueFromArgs(string[] args, char key)
+        {
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i].Contains(key))
+                {
+                    return Convert.ToInt32(args[i + 1]);
+                }
+            }
+
+            return 0;
         }
     }
 }

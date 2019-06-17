@@ -3,7 +3,6 @@ using System;
 
 namespace lp1_project2
 {
-    [Serializable]
     /// <summary>
     /// Base class for the game board, controls the tiles and the place the
     /// pieces, making sure they have their correct positions considering the
@@ -11,6 +10,7 @@ namespace lp1_project2
     /// </summary>
     class Board
     {
+        public int Turns { get; set; }
         // Width and Height of the real board, shown on screen.
         public int Width {get; private set;}
         public int Height {get; private set;}
@@ -41,11 +41,13 @@ namespace lp1_project2
         /// <param name="controllableH"> 
         /// Number of Zombies controllable by player input 
         /// </param>
-        public Board(int width, int height, int nZ, int nH, int controllableZ, int controllableH)
+        public Board(int width, int height, int nZ, int nH, int controllableZ, int controllableH, int turns)
         {
 
             Width = width;
             Height = height;
+
+            Turns = turns;
 
             humansList = new List<Human>();
             zombiesList = new List<Zombie>();
@@ -58,23 +60,14 @@ namespace lp1_project2
                 {
 
                     realBoard[x,y] = new Tile(x,y);
-                    
                 }     
-
             }
-
-
-
-
             // Make the agent list
             agentsList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
             agentsList.AddRange(MakeAgentList<Human>(nH, controllableH));   
 
             // Populate the Tiles
             PopulateTiles();
-
-
-
         }
 
         /// <summary>

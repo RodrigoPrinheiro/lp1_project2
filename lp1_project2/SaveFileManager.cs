@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace lp1_project2
     {
         // File paths for the current project folder
         private const string saveFile = @"GameSave.txt";
-        private const string currentGame = @"CurrentGameSave.txt";
+        private XmlSerializer serializedObj;
 
         /// <summary>
         /// Dictates if the player is using a save file or not
@@ -27,50 +28,14 @@ namespace lp1_project2
         public SaveFileManager(bool useSave)
         {
             UsingSave = useSave;
-        }
-
-        /// <summary>
-        /// Creates the current game save file, if the player picked to use
-        /// the save file then copy the save file to the current game file
-        /// </summary>
-        /// <param name="args">
-        /// Arguments passed in console to be copied to the save file
-        /// </param>
-        public void CreateGameSettingsFile(string[] args)
-        {
-            // Try/Catch block to debug and save use of files
-            try
-            {
-                // If is using save, copy the contents into the currentGame
-                // save file
-                if (File.Exists(currentGame) && !UsingSave)
-                {
-                    File.Delete(currentGame);
-                }
-                else if (UsingSave)
-                {
-                    File.Copy(saveFile, currentGame, true);
-                }
-
-                using (StreamWriter fs = File.CreateText(currentGame))
-                {
-                    foreach (string s in args)
-                    {
-                        WriteLineToFile(fs, s);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            // serializedObj = new XmlSerializer(typeof(Board));
         }
 
         /// <summary>
         /// Checks if the save file exists, creates one and copies the current
         /// game state to the save file
         /// </summary>
-        public void SaveGame()
+        public void SaveGame(Board boardToSave)
         {
             bool shouldSaveGame;
 
@@ -81,58 +46,19 @@ namespace lp1_project2
             // If it should save the game check if there is a file to save to.
             if (shouldSaveGame)
             {
-                File.Copy(currentGame, saveFile, true);
+                TextWriter file = new StreamWriter(saveFile);
+                serializedObj.Serialize(file, boardToSave);
+
+                file.Close();
             }
         }
 
-        /// <summary>
-        /// Cleans the current game file.<br>Called when the program exits.
-        /// </summary>
-        public void ClearCurrentGame()
+        public void ReadSave(Board gameBoard)
         {
-            if (File.Exists(currentGame))
-                File.Delete(currentGame);
-        }
+            FileStream readFile = new FileStream
+                (saveFile, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-        /// <summary>
-        /// Simple File writer that excludes some characters of a given string
-        /// before writing to the file.<br> This is only called inside the
-        /// CreateGameSettingsFile() method, so no need to worry about the file
-        /// variable type.
-        /// </summary>
-        /// <param name="file">
-        /// File of type StreamWriter on where to write the given string.
-        /// </param>
-        /// <param name="str">
-        /// String to be written to the file in a new line.
-        /// </param>
-        private void WriteLineToFile(StreamWriter file, string str)
-        {
-            string cleanString;
-            cleanString = str.Trim(new Char[] { ' ', '-' });
-            if (IsStringDigit(cleanString))
-                file.WriteLine(cleanString);
-            else
-                file.Write(cleanString + " = ");
-
-        }
-
-        /// <summary>
-        /// Checks if a given string contains a digit.
-        /// </summary>
-        /// <param name="str">String on where to search for a digit</param>
-        /// <returns>Returns true if the string contains a digit</returns>
-        private bool IsStringDigit(string str)
-        {
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (char.IsDigit(str[i]))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            gameBoard = (Board)serializedObj.Deserialize(readFile);
         }
     }
 }
