@@ -56,7 +56,6 @@ namespace lp1_project2
         {
             while (true)
             {
-
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
             }

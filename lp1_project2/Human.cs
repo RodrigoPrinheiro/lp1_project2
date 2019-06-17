@@ -24,8 +24,6 @@ namespace lp1_project2
 
         }
 
-
-
         public override string ToString()
         {
             return $"{Tag:X2}";
