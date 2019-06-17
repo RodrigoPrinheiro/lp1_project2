@@ -81,13 +81,14 @@ namespace lp1_project2
         /// </summary>
         private void GameLoop()
         {
-            
+            turnOrder = new List<Agent>();
             while (true)
             {
                 // Shuffle the agent list
 
                 // Use a local list to avoid changing it while we're iterating
                 // trough it
+                turnOrder.Clear();
                 turnOrder.AddRange(board.agentsList);
                 Shuffle.ShuffleList<Agent>(turnOrder);
 
