@@ -16,12 +16,16 @@ namespace lp1_project2
         /// <summary>
         /// Runs away from the nearest enemy
         /// </summary>
-        /// <param name="t">realBoard array from Board class</param>
+        /// <param name="t">tile that it is going to move to</param>
         /// <param name="newPos"> NextStep given by pathfinder</param>
-        public void Action(Tile t, Position newPos, Board gameB = null)
+        public void Action(Tile[,] t, Position newPos, Board gameB = null)
         {
-            if(t.occupier == null) position -= newPos;
-
+            if(t[newPos.X, newPos.Y].occupier == null)
+            {
+                t[position.X, position.Y].occupier = null;
+                position += newPos;
+                t[position.X, position.Y].occupier = this;
+            }
         }
 
 
