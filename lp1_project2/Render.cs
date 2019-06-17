@@ -4,7 +4,7 @@ using System.Text;
 
 namespace lp1_project2
 {
-    static public class Render
+    static class Render
     {
         public static void Board(Tile[,] board)
         {

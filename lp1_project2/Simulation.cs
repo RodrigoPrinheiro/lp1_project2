@@ -51,7 +51,7 @@ namespace lp1_project2
                 }
                 
                 // Populate the tiles on board
-                gameBoard.PopulateTiles();
+               // gameBoard.PopulateTiles();
 
                 // Update the simulationPositionsDictionary
                 gameBoard.UpdateSimPositionsDictionary(Faction.Zombie);
