@@ -13,18 +13,19 @@ namespace lp1_project2
         }
 
 
-        public void Action(Tile t, Position newPos, Board gameBoard)
+        public void Action(Tile[,] t, Position newPos, Board gameBoard)
         {
-            if(t.occupier == null) 
+            if(t[newPos.X, newPos.Y].occupier == null) 
             {
-                gameBoard.realBoard[position.X, position.Y].occupier = null;
+                t[position.X, position.Y].occupier = null;
                 position += newPos;
-                gameBoard.realBoard[position.X, position.Y].occupier = this;
+                t[position.X, position.Y].occupier = this;
                 
             }
-            else if(t.occupier.AgentFaction == Faction.Human) 
+            else if(t[newPos.X, newPos.Y].occupier.AgentFaction 
+                == Faction.Human) 
             {
-                gameBoard.ConvertHuman(t.occupier as Human);
+                gameBoard.ConvertHuman(t[newPos.X, newPos.Y].occupier as Human);
                 
             }
                 

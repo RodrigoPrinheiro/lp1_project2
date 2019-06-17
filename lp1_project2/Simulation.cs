@@ -11,7 +11,7 @@ namespace lp1_project2
 
         List<Agent> orderedList = new List<Agent>();
 
-        void Cycle()
+       /* void Cycle()
         {
             // Shuffle the order of action for all agents
 
@@ -20,19 +20,8 @@ namespace lp1_project2
             {
                 // selectedAgent = a;
 
-                KeyValuePair<Agent, Position> nearestEnemy = 
-                new KeyValuePair<Agent, Position>();
-                if (a as Human != null)
-                {
-                    nearestEnemy = PathFinder.FindNearestEnemy<Zombie>(a.position, gameBoard.zombieSimPositions);
-                }
-                else if(a as Zombie != null)
-                {
-                    nearestEnemy = PathFinder.FindNearestEnemy<Human>(a.position, gameBoard.humanSimPositions);
-
-                }
-
-                Position nextStep = 
+            
+               Position nextStep = 
                 PathFinder.GetNextStepTowards(a.position, nearestEnemy.Value);
 
 
@@ -51,18 +40,15 @@ namespace lp1_project2
                 }
                 
                 // Populate the tiles on board
-               // gameBoard.PopulateTiles();
+                // gameBoard.PopulateTiles();
 
-                // Update the simulationPositionsDictionary
-                gameBoard.UpdateSimPositionsDictionary(Faction.Zombie);
-                gameBoard.UpdateSimPositionsDictionary(Faction.Human);
 
                 //Code to wait
                 Thread.Sleep(2000);
 
             }
 
-        }
+        } */
 
 
 
