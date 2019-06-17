@@ -22,8 +22,8 @@ namespace lp1_project2
         public static void Board(Tile[,] board, Agent currentAgent = null)
         {
             // Get the rows and cols of the board
-            int rows = board.GetLength(0);
-            int cols = board.GetLength(1);
+            int cols = board.GetLength(0);
+            int rows = board.GetLength(1);
 
             const char emptyTileChar = '.'; 
             Console.Write("   ");

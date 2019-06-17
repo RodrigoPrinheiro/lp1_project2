@@ -29,16 +29,18 @@ namespace lp1_project2
         /// </param>
         public void Action(Tile[,] t, Position newPos, Board gameBoard)
         {
-            if(t[newPos.X, newPos.Y].occupier == null) 
+            if(t[position.X + newPos.X,position.Y + newPos.Y].occupier == null) 
             {
                 t[position.X, position.Y].occupier = null;
                 position += newPos;
                 t[position.X, position.Y].occupier = this;
                 
             }
-            else if(t[newPos.X, newPos.Y].occupier.AgentFaction == Faction.Human) 
+            else if(t[position.X + newPos.X, position.Y + newPos.Y].occupier.AgentFaction 
+                == Faction.Human) 
             {
-                gameBoard.ConvertHuman(t[newPos.X, newPos.Y].occupier as Human);
+                gameBoard.ConvertHuman(t[position.X + newPos.X, position.Y + newPos.Y].occupier as Human);
+                
             }
         }
 
