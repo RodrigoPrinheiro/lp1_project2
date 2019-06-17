@@ -10,6 +10,8 @@ namespace lp1_project2
         private SaveFileManager gameSaver;
         private int turns;
 
+        
+
         public Game(string[] args)
         {
             // Boot up the game save
@@ -56,6 +58,79 @@ namespace lp1_project2
         {
             while (true)
             {
+                // Shuffle the agent list
+                Shuffle.ShuffleList<Agent>(board.agentsList);
+
+                // go down the turn order
+                foreach(Agent a in board.agentsList)
+                {
+
+                    if(a.InputControlled) 
+                    {
+                        Position newPosition = new Position();
+                        ConsoleKeyInfo input = Console.ReadKey();
+
+                        // WAXD for cardinal directions
+                        // Q E and Z C for diagonals
+                        switch(input.Key)
+                        {
+                            // Right
+                            case ConsoleKey.D:
+                            newPosition.X = 1;
+                            break;
+                            
+                            // Left
+                            case ConsoleKey.A:
+                            newPosition.X = -1;
+                            break;
+
+                            // Down
+                            case ConsoleKey.X:
+                            newPosition.Y = -1;
+                            break;
+
+                            // Up
+                            case ConsoleKey.W:
+                            newPosition.Y = 1;
+                            break;
+
+                            // Top-Left
+                            case ConsoleKey.Q:
+                            newPosition.X = -1;
+                            newPosition.Y = 1;
+                            break;
+
+                            // Top-Right
+                            case ConsoleKey.E:
+                            newPosition.X = 1;
+                            newPosition.Y = 1;
+                            break;
+
+                            // Bottom-Left
+                            case ConsoleKey.Z:
+                            newPosition.X = -1;
+                            newPosition.Y = -1;
+                            break;
+
+                            // Bottom-Right
+                            case ConsoleKey.C:
+                            newPosition.X = 1;
+                            newPosition.Y = -1;
+                            break;
+
+
+                        }
+
+
+                    }
+                    else
+                    {
+
+
+                        
+                    }
+
+                }
 
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
