@@ -5,6 +5,9 @@ using System.Threading;
 
 namespace lp1_project2
 {
+    /// <summary>
+    /// Contains the logic for the Game, this means menus, loop and StartUp.
+    /// </summary>
     class Game
     {
         private Board board;
@@ -44,6 +47,10 @@ namespace lp1_project2
             bStar = new PathFinder(board.Width, board.Height);
         }
 
+        /// <summary>
+        /// Builds the game board with the arguments passed in the console.
+        /// </summary>
+        /// <param name="args"></param>
         private void BuildBoard(string[] args)
         {
             // Get all values from the current game file
@@ -64,7 +71,6 @@ namespace lp1_project2
         /// </summary>
         public void Run()
         {
-            Render.Board(board.realBoard);
             Continue();
             GameLoop();
         }
@@ -82,6 +88,8 @@ namespace lp1_project2
                 // go down the turn order
                 foreach(Agent a in board.agentsList)
                 {
+                    GameRender(a);
+
                     Position newPosition = new Position();
                     if(a.InputControlled) 
                     {
@@ -103,7 +111,6 @@ namespace lp1_project2
                     else if (a as Zombie != null)
                         (a as Zombie).Action(board.realBoard, newPosition, board);
 
-                    Render.Board(board.realBoard);
                     // controls the speed at which agents do their thing
                     Thread.Sleep(2000);
                 }
@@ -118,6 +125,23 @@ namespace lp1_project2
         }
 
         /// <summary>
+        /// Renders the whole game calling Render class
+        /// </summary>
+        /// <param name="currentAgent"></param>
+        private void GameRender(Agent currentAgent)
+        {
+            Console.Clear();
+            Render.Board(board.realBoard, currentAgent);
+            Console.WriteLine($"Current NPC moving: {currentAgent.Tag}");
+
+            if (currentAgent.InputControlled)
+            {
+                Console.WriteLine("NPC is Controllable, " +
+                    "Awaiting your Input Master!");
+            }
+        }
+
+        /// <summary>
         /// Quality of life method so Console.WriteLine isn't repeated multiple
         /// times
         /// </summary>
@@ -127,6 +151,15 @@ namespace lp1_project2
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Translates the player input into coordinates.
+        /// </summary>
+        /// <param name="input">
+        /// Player input
+        /// </param>
+        /// <returns>
+        /// Returns the position of the next step.
+        /// </returns>
         private Position InputCheck(ConsoleKey input)
         {
             Position p = new Position();
@@ -188,6 +221,13 @@ namespace lp1_project2
 
         }
 
+        /// <summary>
+        /// Searches for a specific key in arguments and gets its value. <br>
+        /// Arguments can be in any order.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private int GetValueFromArgs(string[] args, char key)
         {
             for (int i = 0; i < args.Length; i++)
