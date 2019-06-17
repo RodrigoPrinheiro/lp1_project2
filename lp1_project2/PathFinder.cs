@@ -34,9 +34,11 @@ namespace lp1_project2
 
             foreach (Agent a in agentList)
             {
-                if (a != currentAgent)
+                if (a != currentAgent && 
+                    a.AgentFaction != currentAgent.AgentFaction)
                 {
-                    distance = GetToroidalDistance(currentAgent.position, a.position);
+                    distance = GetToroidalDistance
+                        (currentAgent.position, a.position);
 
                     if (closestDistance > distance)
                     {

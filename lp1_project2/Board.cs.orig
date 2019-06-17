@@ -246,8 +246,9 @@ namespace lp1_project2
         /// <summary>
         ///  Usefull for the first run.
         /// </summary>
-        public void PopulateTiles()
+        void PopulateTiles()
         {
+        
             foreach(Agent a in agentsList)
             {
 
@@ -279,6 +280,10 @@ namespace lp1_project2
             if(x > Width) newPos.X = x - Width;
             if(y > Height) newPos.Y = y -Height;
 
+<<<<<<< HEAD
+            realBoard[x, y].occupier = a;
+=======
+>>>>>>> origin/master
             return newPos;
 
         }
