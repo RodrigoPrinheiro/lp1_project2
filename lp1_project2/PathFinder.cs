@@ -30,7 +30,7 @@ namespace lp1_project2
         {
             Agent closestAgent = null;
             double distance;
-            double closestDistance = 0;
+            double closestDistance = 100000;
 
             foreach (Agent a in agentList)
             {
