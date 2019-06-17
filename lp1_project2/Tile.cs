@@ -1,6 +1,6 @@
 namespace lp1_project2
 {
-    public sealed class Tile
+    sealed class Tile
     {
         private Position boardPos {get; set;}
         public Agent occupier;
