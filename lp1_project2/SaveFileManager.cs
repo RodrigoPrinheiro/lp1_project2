@@ -5,6 +5,9 @@ using System.Text;
 
 namespace lp1_project2
 {
+    // http://www.jonasjohn.de/snippets/csharp/xmlserializer-example.htm
+    // https://weblogs.asp.net/wim/213700
+
     /// <summary>
     /// Reads and translates the arguments given from the console.<br>
     /// Creates a GameSettings file to save the values passed in console.
