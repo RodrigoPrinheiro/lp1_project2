@@ -41,6 +41,7 @@ namespace lp1_project2
             //        BuildBoard(args);
             //}
 
+            bStar = new PathFinder(board.Width, board.Height);
         }
 
         private void BuildBoard(string[] args)
@@ -64,6 +65,8 @@ namespace lp1_project2
         public void Run()
         {
             Render.Board(board.realBoard);
+            Continue();
+            GameLoop();
         }
 
         /// <summary>
@@ -96,19 +99,21 @@ namespace lp1_project2
                     }
 
                     if(a as Human != null) 
-                    (a as Human).Action(board.realBoard, newPosition);
-
+                        (a as Human).Action(board.realBoard, newPosition);
                     else if (a as Zombie != null)
-                    (a as Zombie).Action(board.realBoard, newPosition, board);
+                        (a as Zombie).Action(board.realBoard, newPosition, board);
 
+                    Render.Board(board.realBoard);
                     // controls the speed at which agents do their thing
                     Thread.Sleep(2000);
                 }
 
+                board.Turns--;
                 // Isn't the program supposed to go automaticly if there are no
                 // no controllable agents ?
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
+                else if (board.Turns <= 0) break;
             }
         }
 

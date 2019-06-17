@@ -52,7 +52,7 @@ namespace lp1_project2
             if (occupier.AgentFaction == Faction.Zombie)
                 Console.ForegroundColor = ConsoleColor.Red;
             else
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Cyan;
 
         }
     }
