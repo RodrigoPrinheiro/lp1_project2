@@ -73,7 +73,13 @@ namespace lp1_project2
             // Populate the Tiles
             PopulateTiles();
 
+<<<<<<< HEAD
+            // Update all the positions to be useable by the simulation 
+            UpdateSimPositionsDictionary(Faction.Human);
+            UpdateSimPositionsDictionary(Faction.Zombie);
+=======
 
+>>>>>>> origin/master
 
         }
 
@@ -135,6 +141,10 @@ namespace lp1_project2
         {
             foreach(Agent a in agentsList)
             {
+<<<<<<< HEAD
+                a.position = ConvertToRealMapCoords(a.position);
+=======
+>>>>>>> origin/master
                 //Place them on tiles on the real board
                 realBoard[a.position.X,a.position.Y].occupier = a;
             }
@@ -149,6 +159,8 @@ namespace lp1_project2
             agentsList.Remove(h);
             agentsList.Add(new Zombie(h.Tag, h.position, false));
         }
+
+
     }
 
 }
