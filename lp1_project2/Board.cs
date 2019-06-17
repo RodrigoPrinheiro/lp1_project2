@@ -53,8 +53,6 @@ namespace lp1_project2
         // Dictionary that stores each agent on either faction as keys
         // and then its 5 positions (its real positions and 4 simulated ones)
         // as values for each agent
-        public Dictionary<Human, Position[]> humanSimPositions;
-        public Dictionary<Zombie, Position[]> zombieSimPositions;
 
         List<Human> humansList;
         List<Zombie> zombiesList;
@@ -87,9 +85,6 @@ namespace lp1_project2
             zombiesList = new List<Zombie>();
             agentsList = new List<Agent>();
 
-            humanSimPositions = new Dictionary<Human, Position[]>();
-            zombieSimPositions = new Dictionary<Zombie, Position[]>();
-
             realBoard = new Tile[width, height];
             for(int x = 0; x < realBoard.GetLength(0); x++)
             {
@@ -103,21 +98,16 @@ namespace lp1_project2
             }
 
 
-            // Make the seperate zombie and human lists
-            zombiesList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
-            humansList.AddRange(MakeAgentList<Human>(nH, controllableH));
 
-            // join them in one big list for the simulator to use in turn order
-            agentsList.AddRange(zombiesList);
-            agentsList.AddRange(humansList);   
+
+            // Make the agent list
+            agentsList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
+            agentsList.AddRange(MakeAgentList<Human>(nH, controllableH));   
 
             // Populate the Tiles
             PopulateTiles();
 
 
-            // Update all the positions to be useable by the simulation 
-            UpdateSimPositionsDictionary(Faction.Human);
-            UpdateSimPositionsDictionary(Faction.Zombie);
 
         }
 
@@ -173,113 +163,16 @@ namespace lp1_project2
         }
 
         /// <summary>
-        /// Fill in the dictionary with each agent and their corresponding 5 positions
-        /// /(their position on the real board and the 4 simulated for pathfinding)
-        /// </summary>
-        /// <param name="faction"> Fill in the zombie or human Dictionary? </param>
-        public void UpdateSimPositionsDictionary(Faction faction)
-        {
-
-
-            Position[] simPos = new Position[9];
-
-            if(faction == Faction.Human)
-            {
-
-                foreach (Human h in humansList)
-                {
-                    // In Clockwise order, starting at the center and going right
-                    simPos[0] = h.position;
-                    simPos[1] = 
-                    new Position(h.position.X + Width, h.position.Y);
-                    simPos[2] = 
-                    new Position(h.position.X + Width, h.position.Y - Height);
-                    simPos[3] = 
-                    new Position(h.position.X, h.position.Y - Height);
-                    simPos[4] = 
-                    new Position(h.position.X - Width, h.position.Y - Height);
-                    simPos[5] =
-                    new Position(h.position.X - Width, h.position.Y);
-                    simPos[6] =
-                    new Position(h.position.X - Width, h.position.Y + Height);
-                    simPos[7] =
-                    new Position(h.position.X, h.position.Y + Height);
-                    simPos[8] =
-                    new Position(h.position.X + Width, h.position.Y + Height);
-
-                    humanSimPositions.Add(h, simPos);
-
-                }
-            }
-
-            else if(faction == Faction.Zombie)
-            {
-
-                foreach (Zombie z in zombiesList)
-                {
-                    // In Clockwise order, starting at the center and going right
-                    simPos[0] = z.position;
-                    simPos[1] = 
-                    new Position(z.position.X + Width, z.position.Y);
-                    simPos[2] = 
-                    new Position(z.position.X + Width, z.position.Y - Height);
-                    simPos[3] = 
-                    new Position(z.position.X, z.position.Y - Height);
-                    simPos[4] = 
-                    new Position(z.position.X - Width, z.position.Y - Height);
-                    simPos[5] =
-                    new Position(z.position.X - Width, z.position.Y);
-                    simPos[6] =
-                    new Position(z.position.X - Width, z.position.Y + Height);
-                    simPos[7] =
-                    new Position(z.position.X, z.position.Y + Height);
-                    simPos[8] =
-                    new Position(z.position.X + Width, z.position.Y + Height);
-
-                    zombieSimPositions.Add(z, simPos);
-
-                }
-            }
-
-        }
-
-        /// <summary>
         ///  Usefull for the first run.
         /// </summary>
         public void PopulateTiles()
         {
             foreach(Agent a in agentsList)
             {
-
-                a.position = ConvertToRealMapCoords(a.position);
                 //Place them on tiles on the real board
                 realBoard[a.position.X,a.position.Y].occupier = a;
             }
 
-
-        }
-
-        /// <summary>
-        ///  Converts a Position to coordinates inside the real Board
-        /// \
-        ///  Thus making it fit inside the RealBoard Array of tiles.
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public Position ConvertToRealMapCoords(Position p)
-        {
-            Position newPos = p;
-            int x = p.X;
-            int y = p.Y;
-                
-            // Validate all positions
-            if(x < 0) newPos.X = -x;
-            if(y < 0) newPos.Y = -y;
-
-            if(x > Width) newPos.X = x - Width;
-            if(y > Height) newPos.Y = y -Height;
-
-            return newPos;
 
         }
 
@@ -289,8 +182,8 @@ namespace lp1_project2
         /// <param name="h">Human to zombify</param>
         public void ConvertHuman(Human h) 
         {
-            humansList.Remove(h);
-            zombiesList.Add(new Zombie(h.Tag, h.position, false));
+            agentsList.Remove(h);
+            agentsList.Add(new Zombie(h.Tag, h.position, false));
         }
 
 
