@@ -7,56 +7,46 @@ namespace lp1_project2
     /// Pathfinder class uses a position and searches for the closest path in
     /// a list of zombies, humans, or positions
     /// </summary>
-    static class PathFinder
+    class PathFinder
     {
-        //TODO:Update this summary
-        /// <summary>
-        /// Go trough the positions of all the enemies.
-        /// And return the nearest to the origin point.<br>
-        /// This should use the big simulation map
-        /// </summary>
-        /// <param name="originPoint"> The starting point of the search</param>
-        /// <param name="opponentsList"> The list with all the positions that are potential targets.</param>
-        /// <returns></returns>
-        public static KeyValuePair<Agent, Position> FindNearestEnemy<T>(Position originPoint, Dictionary<T, Position[]> enemyDict) where T : Agent      
+        private int mapYSize;
+        private int mapXSize;
 
+        public PathFinder(int x, int y)
         {
-            Position  nearestEnemyPosition = new Position();
-            Agent nearestEnemyAgent = null;
+            mapXSize = x;
+            mapYSize = y;
+        }
 
-            // Make sure delta'll always be smaller
-            float distanceToNearest = float.MaxValue;
+        /// <summary>
+        /// Gets the nearest Agent from an original one
+        /// </summary>
+        /// <param name="agentList">
+        /// List of agents where to search the nearest
+        /// </param>
+        /// <param name="currentAgent"> Origin agent</param>
+        /// <returns> Returns the reference to the closest Agent</returns>
+        public Agent GetNearest(IEnumerable<Agent> agentList, Agent currentAgent)
+        {
+            Agent closestAgent = null;
+            double distance;
+            double closestDistance = 0;
 
-            // go trough each key in the dictionary
-            // then go trough each Position in the value corresponding 
-            // to that key
-            foreach (T a in enemyDict.Keys)
-            {   
-                foreach(Position p in enemyDict[a])
+            foreach (Agent a in agentList)
+            {
+                if (a != currentAgent)
                 {
+                    distance = GetToroidalDistance(currentAgent.position, a.position);
 
-                    // Distance between 2 points:
-                    // x^2 + y^2 = d^2
-                    float delta = MathF.Sqrt(
-                        MathF.Pow(p.X - originPoint.X, 2) + 
-                        MathF.Pow(p.Y - originPoint.Y, 2) );
-
-                    // Update the variables to always reflect who's closest
-                    // to the origin
-                    if (delta < distanceToNearest) 
+                    if (closestDistance > distance)
                     {
-                        nearestEnemyPosition = p;
-                        nearestEnemyAgent = a;
-                        distanceToNearest = delta;
+                        closestDistance = distance;
+                        closestAgent = a;
                     }
-                   
                 }
-
             }
 
-            return 
-            new KeyValuePair<Agent, Position>(nearestEnemyAgent, nearestEnemyPosition);
-
+            return closestAgent;
         }
 
         /// <summary>
@@ -117,8 +107,8 @@ namespace lp1_project2
         /// <param name="mapXSize"> Size X of the current map</param>
         /// <param name="mapYSize"> Size Y of the current map</param>
         /// <returns> Returns the distance between the 2 Agents</returns>
-        public static double GetToroidalDistance
-            (Position a1, Position a2, int mapXSize, int mapYSize)
+        private double GetToroidalDistance
+            (Position a1, Position a2)
         {
             float dx = MathF.Abs(a2.X - a1.X);
             float dy = MathF.Abs(a2.Y - a1.Y);
