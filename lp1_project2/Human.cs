@@ -27,21 +27,46 @@ namespace lp1_project2
             int upperX = t.GetLength(0) - 1;
             int upperY = t.GetLength(1) - 1;
 
-            // Check bounds, send the agent around if bounds are going to be
-            // crossed
-            if (position.X + newPos.X > upperX) newPos.X = -(upperX );
-            else if (position.X + newPos.X < 0) newPos.X = upperX ;
-
-            if (position.Y + newPos.Y > upperY) newPos.Y = -(upperY);
-            else if (position.Y + newPos.Y < 0) newPos.Y = upperY ;
-
-
-            if (t[position.X + newPos.X, position.Y + newPos.Y].occupier == null)
+            if (InputControlled)
             {
-                t[position.X, position.Y].occupier = null;
-                position += newPos;
-                t[position.X, position.Y].occupier = this;
+                if (position.X + newPos.X > upperX) newPos.X = -(upperX);
+                else if (position.X + newPos.X < 0) newPos.X = upperX;
+
+                if (position.Y + newPos.Y > upperY) newPos.Y = -(upperY);
+                else if (position.Y + newPos.Y < 0) newPos.Y = upperY;
+
+
+
+                if (t[position.X + newPos.X, position.Y + newPos.Y].occupier == null)
+                {
+                    t[position.X, position.Y].occupier = null;
+                    position += newPos;
+                    t[position.X, position.Y].occupier = this;
+
+                }
+
             }
+            else
+            {
+                // Check bounds, send the agent around if bounds are going to be
+                // crossed
+                if (position.X - newPos.X > upperX) newPos.X = -(upperX);
+                else if (position.X - newPos.X < 0) newPos.X = upperX;
+
+                if (position.Y - newPos.Y > upperY) newPos.Y = -(upperY);
+                else if (position.Y - newPos.Y < 0) newPos.Y = upperY;
+
+
+                if (t[position.X - newPos.X, position.Y - newPos.Y].occupier == null)
+                {
+                    t[position.X, position.Y].occupier = null;
+                    position -= newPos;
+                    t[position.X, position.Y].occupier = this;
+                }
+
+            }
+
+            
         }
 
         public override string ToString()
