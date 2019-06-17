@@ -280,10 +280,6 @@ namespace lp1_project2
             if(x > Width) newPos.X = x - Width;
             if(y > Height) newPos.Y = y -Height;
 
-                realBoard[x, y].occupier = a;
-            }
-
-
             return newPos;
 
         }
@@ -297,6 +293,8 @@ namespace lp1_project2
             humansList.Remove(h);
             zombiesList.Add(new Zombie(h.Tag, h.position, false));
         }
+
+
     }
 
 }
