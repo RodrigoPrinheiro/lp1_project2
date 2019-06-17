@@ -88,7 +88,7 @@ namespace lp1_project2
 
                 // Use a local list to avoid changing it while we're iterating
                 // trough it
-                turnOrder = board.agentsList;
+                turnOrder.AddRange(board.agentsList);
                 Shuffle.ShuffleList<Agent>(turnOrder);
 
                 // go down the turn order
