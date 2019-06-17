@@ -20,7 +20,7 @@ namespace lp1_project2
         /// <param name="newPos"> NextStep given by pathfinder</param>
         public void Action(Tile[,] t, Position newPos, Board gameB = null)
         {
-            if(t[newPos.X, newPos.Y].occupier == null)
+            if(t[position.X + newPos.X, position.Y + newPos.Y].occupier == null)
             {
                 t[position.X, position.Y].occupier = null;
                 position += newPos;

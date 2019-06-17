@@ -85,7 +85,7 @@ namespace lp1_project2
                     Position newPosition = new Position();
                     if(a.InputControlled) 
                     {
-                        
+                        Console.WriteLine("Input Movement:");
                         ConsoleKeyInfo input = Console.ReadKey();
                         newPosition = InputCheck(input.Key);
                     
@@ -147,43 +147,44 @@ namespace lp1_project2
 
                 // Down
                 case ConsoleKey.X:
-                p.Y = -1;
+                p.Y = 1;
                 break;
 
                 // Up
                 case ConsoleKey.W:
-                p.Y = 1;
+                p.Y = -1;
                 break;
 
                 // Top-Left
                 case ConsoleKey.Q:
                 p.X = -1;
-                p.Y = 1;
+                p.Y = -1;
                 break;
 
                 // Top-Right
                 case ConsoleKey.E:
                 p.X = 1;
-                p.Y = 1;
+                p.Y = -1;
                 break;
 
                 // Bottom-Left
                 case ConsoleKey.Z:
                 p.X = -1;
-                p.Y = -1;
+                p.Y = 1;
                 break;
 
                 // Bottom-Right
                 case ConsoleKey.C:
                 p.X = 1;
-                p.Y = -1;
+                p.Y = 1;
                 break;
 
                 default:
                 Console.WriteLine("Invalid input");
                 break;
-            }            
+            }
 
+            Console.Write($"{input}, goes {p}");
             return p;
 
         }

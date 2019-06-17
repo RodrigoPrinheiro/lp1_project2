@@ -9,8 +9,8 @@ namespace lp1_project2
         public static void Board(Tile[,] board)
         {
             // Get the rows and cols of the board
-            int rows = board.GetLength(0);
-            int cols = board.GetLength(1);
+            int cols = board.GetLength(0);
+            int rows = board.GetLength(1);
 
             const char emptyTileChar = '.'; 
             Console.Write("   ");
@@ -32,10 +32,10 @@ namespace lp1_project2
                 Console.Write($"{i + 1, -2}: ");
                 for (int j = 0; j < cols; j++)
                 {
-                    if (board[i, j].occupier != null)
+                    if (board[j, i].occupier != null)
                     {
-                        PickConsoleForeground(board[i, j].occupier);
-                        Console.Write($"{board[i, j],-4}");
+                        PickConsoleForeground(board[j, i].occupier);
+                        Console.Write($"{board[j, i],-4}");
                         Console.ResetColor();
                     }
                     else
