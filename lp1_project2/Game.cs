@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+
+
 
 namespace lp1_project2
 {
@@ -13,6 +13,7 @@ namespace lp1_project2
         private Board board;
         private PathFinder bStar;
         private SaveFileManager gameSaver;
+        private List<Agent> turnOrder;
 
         
 
@@ -80,13 +81,18 @@ namespace lp1_project2
         /// </summary>
         private void GameLoop()
         {
+            
             while (true)
             {
                 // Shuffle the agent list
-                Shuffle.ShuffleList<Agent>(board.agentsList);
+
+                // Use a local list to avoid changing it while we're iterating
+                // trough it
+                turnOrder = board.agentsList;
+                Shuffle.ShuffleList<Agent>(turnOrder);
 
                 // go down the turn order
-                foreach(Agent a in board.agentsList)
+                foreach(Agent a in turnOrder)
                 {
                     GameRender(a);
 
@@ -111,8 +117,6 @@ namespace lp1_project2
                     else if (a as Zombie != null)
                         (a as Zombie).Action(board.realBoard, newPosition, board);
 
-                    // controls the speed at which agents do their thing
-                    Thread.Sleep(2000);
                 }
 
                 board.Turns--;
@@ -121,6 +125,7 @@ namespace lp1_project2
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
                 else if (board.Turns <= 0) break;
+                else if (board.GetHumanCount() == 0) break;
             }
         }
 

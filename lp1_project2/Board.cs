@@ -142,6 +142,18 @@ namespace lp1_project2
             agentsList.Remove(h);
             agentsList.Add(new Zombie(h.Tag, h.position, false));
         }
+
+        /// <summary>
+        /// Get how many humans are still alive
+        /// </summary>
+        /// <returns></returns>
+        public int GetHumanCount()
+        {
+            int count = 0;
+            foreach (Agent a in agentsList) if ((a as Human) != null) count++;
+            return count;
+
+        }
     }
 
 }
