@@ -94,11 +94,12 @@ namespace lp1_project2
                 // go down the turn order
                 foreach(Agent a in turnOrder)
                 {
-                    GameRender(a);
+                    
 
                     Position newPosition = new Position();
                     if(a.InputControlled) 
                     {
+                        GameRender(a);
                         Console.WriteLine("Input Movement:");
                         ConsoleKeyInfo input = Console.ReadKey();
                         newPosition = InputCheck(input.Key);
@@ -116,6 +117,8 @@ namespace lp1_project2
                         (a as Human).Action(board.realBoard, newPosition);
                     else if (a as Zombie != null)
                         (a as Zombie).Action(board.realBoard, newPosition, board);
+
+                    GameRender(a);
 
                 }
 
