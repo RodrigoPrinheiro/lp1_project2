@@ -23,7 +23,7 @@ namespace lp1_project2
         /// <summary>
         /// Read only property that determines if the Agent is controllable.
         /// </summary>
-        protected bool InputControlled { get; }
+        public bool InputControlled { get; private set; }
 
         public Agent(byte tag, bool input, Faction faction)
         {
