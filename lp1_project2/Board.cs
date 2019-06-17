@@ -244,10 +244,9 @@ namespace lp1_project2
         }
 
         /// <summary>
-        ///  Convert all agent coords to valid ones, then set the occupiers on
-        ///  all tiles
+        ///  Usefull for the first run.
         /// </summary>
-        public void PopulateTiles()
+        void PopulateTiles()
         {
         
             foreach(Agent a in agentsList)
