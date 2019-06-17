@@ -109,12 +109,24 @@ namespace lp1_project2
 
         }
 
-        // TODO: possible issue if human runs away next to another zombie? 
-        // Not sure if we want to avoid this beahviour.
+        /// <summary>
+        /// Get's the distance between 2 agents in a toroidal map
+        /// </summary>
+        /// <param name="a1"> Position of the first Agent</param>
+        /// <param name="a2"> Position of the second Agent</param>
+        /// <param name="mapXSize"> Size X of the current map</param>
+        /// <param name="mapYSize"> Size Y of the current map</param>
+        /// <returns> Returns the distance between the 2 Agents</returns>
+        public static double GetToroidalDistance
+            (Position a1, Position a2, int mapXSize, int mapYSize)
+        {
+            float dx = MathF.Abs(a2.X - a1.X);
+            float dy = MathF.Abs(a2.Y - a1.Y);
 
-        // I dont think we do since the agent that will move is picked randomly
-        // and if you pick the closest one then he behaves accordingly for that one
-        // if he ends up closer to a new zombie then fuck it, he put himself in that situation.
+            if (dx > mapXSize / 2) dx = mapXSize - dx;
+            if (dy > mapYSize / 2) dy = mapXSize - dy;
 
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
     }
 }
