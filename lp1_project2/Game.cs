@@ -87,11 +87,10 @@ namespace lp1_project2
                     Agent b = bStar.GetNearest(board.agentsList, a);
 
 
+                    GameRender(a);
                     Position newPosition = new Position();
                     if(a.InputControlled) 
                     {
-                        Console.WriteLine($"Closest NPC: {b}");
-
                         Console.WriteLine("Input Movement:");
                         ConsoleKeyInfo input = Console.ReadKey();
                         newPosition = InputCheck(input.Key);
@@ -99,10 +98,8 @@ namespace lp1_project2
                     }
                     else
                     {
-                        Console.WriteLine($"Closest NPC: {b}");
                         newPosition = 
                             bStar.GetNextStepTowards(a.position, b.position);
-                        
                     }
 
                     if(a as Human != null) 
@@ -111,6 +108,7 @@ namespace lp1_project2
                         (a as Zombie).Action(board.realBoard, newPosition, board);
 
                     GameRender(a);
+                    Console.WriteLine($"Closest NPC: {b}");
                     Continue();
                 }
 
