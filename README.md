@@ -9,13 +9,13 @@
 
 
 #### Participação
-* A participação geral do grupo foi equilibrada entre o Rafael Silva e o Rodrigo
+* A participação geral do grupo foi equilibrada entre o Rafael castro e Silva Silva e o Rodrigo
 Pinheiro, enquanto o Rodrigo Marques acompanhou o projeto de forma mais leve.
 
 * Rodrigo Marques: Criou a classe `MainMenu` e foi o autor dos dois diagramas
 apresentados no trabalho.
 
-* Rafael Silva: Realizou a maioria da procura dos NPC's no mapa de jogo e resolveu
+* Rafael Castro e Silva: Realizou a maioria da procura dos NPC's no mapa de jogo e resolveu
 vários *bugs* que foram surgindo ao longo do projeto. Embora a solução original
 realizada pelo Rafael não tenha sido a final, grande parte do código foi reutilizável,
 nas classes `Pathfinder`, `Board` e `Tile`. Por sentido de utilidade criou dois *overloads*
