@@ -57,8 +57,9 @@ mais próximo e da direção da casa a andar.
 3. [Serialização de objetos][#ref3]
 4. Alguma da lógica do tabuleiro em si foi retirada do primeiro projeto
 5. [Site para visualizar a acada 5 segundos][#ref4]
-#### [Repositório utilizado][rep]
 
+#### Repositório utilizado
+O repositório usado foi [este][rep] original do aluno Rodrigo Pinheiro.
 
 [#img1]:ClassDiagram.png
 [#img2]:
