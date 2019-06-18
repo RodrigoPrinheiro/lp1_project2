@@ -11,8 +11,6 @@
 #### Participação
 * A participação geral do grupo foi equilibrada entre o Rafael Silva e o Rodrigo
 Pinheiro, enquanto o Rodrigo Marques acompanhou o projeto de forma mais leve.
-Para alem disto o grupo considerou que a solução tornou-se um pouco confusa para
-o que o problema era.
 
 * Rodrigo Marques: Criou a classe `MainMenu` e foi o autor dos dois diagramas
 apresentados no trabalho.
@@ -51,6 +49,13 @@ mais próximo e da direção da casa a andar.
 
 ![DiagramaCiclo][#img2]
 
+#### Conclusões e matéria aprendida
+Concluíndo o grupo considerou que a solução tornou-se um pouco confusa para
+o que o problema era, havendo várias repetições de código que simplesmente podiam ter sido
+transformadas em metodos de poucas linhas. Quanot à matéria aprendida, podemos explorar e aplicar
+*overloading* de operadores para a estrutura `Position` e, apesar de não estarem no estado final do
+projeto, podemos explorar dicionários. O colega Rodrigo Marques considerou que aprendeu a usar melhor
+ciclos `while` e `switch`.
 #### Referências
 1. [Shuffle Fisher Yates][#ref1]
 2. [Visuais de consola][#ref2]
