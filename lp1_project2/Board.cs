@@ -50,7 +50,7 @@ namespace lp1_project2
                 for (int y = 0; y < realBoard.GetLength(1); y++)
                 {
 
-                    realBoard[x, y] = new Tile(x, y);
+                    realBoard[x, y] = new Tile();
                 }
             }
             // Make the agent list

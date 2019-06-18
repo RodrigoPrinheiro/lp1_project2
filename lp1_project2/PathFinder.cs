@@ -59,7 +59,6 @@ namespace lp1_project2
         /// </summary>
         /// <param name="origin">The starting position</param>
         /// <param name="target">The position of what we want to compare against </param>
-        /// <param name="approach">Whether the agent in the origin wants to approach or run away from the agent in the target position</param>
         /// <returns></returns>
         public Position GetNextStepTowards(Position origin, Position target)
         {
@@ -104,8 +103,6 @@ namespace lp1_project2
         /// </summary>
         /// <param name="a1"> Position of the first Agent</param>
         /// <param name="a2"> Position of the second Agent</param>
-        /// <param name="mapXSize"> Size X of the current map</param>
-        /// <param name="mapYSize"> Size Y of the current map</param>
         /// <returns> Returns the distance between the 2 Agents</returns>
         private double GetToroidalDistance
             (Position a1, Position a2)
