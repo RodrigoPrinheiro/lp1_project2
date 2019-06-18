@@ -34,7 +34,7 @@ namespace lp1_project2
 
             foreach (Agent a in agentList)
             {
-                if (a != currentAgent && 
+                if (a != currentAgent &&
                     a.AgentFaction != currentAgent.AgentFaction)
                 {
                     distance = GetToroidalDistance
@@ -64,7 +64,7 @@ namespace lp1_project2
         public Position GetNextStepTowards(Position origin, Position target)
         {
             // Returned Position
-            Position nextStep = new Position(0,0);
+            Position nextStep = new Position(0, 0);
 
             int dx = target.X - origin.X;
             int dy = target.Y - origin.Y;
@@ -87,14 +87,14 @@ namespace lp1_project2
                 else if (dy < 0) nextStep.Y = -1;
             }
 
-           // If the difference in the X and Y axis are the same, 
-           // move diagonally
-           // use CompareTo do decide what direction in specific.
-           else if ((int)MathF.Pow(dx, 2) == (int)MathF.Pow(dy, 2))
-           {
-               nextStep.X = 1 * target.X.CompareTo(origin.X);
-               nextStep.Y = 1 * target.Y.CompareTo(origin.Y);
-           }
+            // If the difference in the X and Y axis are the same, 
+            // move diagonally
+            // use CompareTo do decide what direction in specific.
+            else if ((int)MathF.Pow(dx, 2) == (int)MathF.Pow(dy, 2))
+            {
+                nextStep.X = 1 * target.X.CompareTo(origin.X);
+                nextStep.Y = 1 * target.Y.CompareTo(origin.Y);
+            }
 
             return nextStep;
         }

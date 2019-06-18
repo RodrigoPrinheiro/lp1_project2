@@ -10,7 +10,7 @@ namespace lp1_project2
     abstract class Agent : ITaggable
     {
         // Tag in Hexadecimal. Aka the name of said agent
-        public byte Tag { get;}
+        public byte Tag { get; }
 
         /// <summary>
         /// Dictates if this Agent is a Zombie or a Human.
@@ -18,7 +18,7 @@ namespace lp1_project2
         public Faction AgentFaction { get; }
 
         // Position of the agent, x,y position
-        public Position position {get;  set;}
+        public Position position { get; set; }
 
         /// <summary>
         /// Read only property that determines if the Agent is controllable.

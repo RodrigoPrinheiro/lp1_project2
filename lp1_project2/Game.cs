@@ -12,26 +12,14 @@ namespace lp1_project2
     {
         private Board board;
         private PathFinder bStar;
-        private SaveFileManager gameSaver;
         private List<Agent> turnOrder;
         private int totalTurns;
-        
+
 
         public Game(string[] args)
         {
-            // Boot up the game save
-            Console.WriteLine("Would you like to use the last saved game?" +
-                " Y|N");
-
-            gameSaver = new SaveFileManager
-                (Console.ReadLine().Equals("Y") ? true : false);
-
-            //gameSaver.ReadSave(saveBoard);
-            if (!gameSaver.UsingSave)
-            {
-                BuildBoard(args);
-                totalTurns = GetValueFromArgs(args, 't');
-            }
+            BuildBoard(args);
+            totalTurns = GetValueFromArgs(args, 't');
 
             bStar = new PathFinder(board.Width, board.Height);
         }
@@ -84,31 +72,30 @@ namespace lp1_project2
                 Shuffle.ShuffleList<Agent>(turnOrder);
 
                 // go down the turn order
-                foreach(Agent a in turnOrder)
+                foreach (Agent a in turnOrder)
                 {
                     // No use searching for enemies if one side is all dead
                     if (board.GetHumanCount() == 0) break;
-                  
                     Agent b = bStar.GetNearest(board.agentsList, a);
 
-
-
+                    // Render game
                     GameRender(a);
+
+                    // New position of Agent a
                     Position newPosition = new Position();
-                    if(a.InputControlled) 
+                    if (a.InputControlled)
                     {
                         Console.WriteLine("Input Movement:");
                         ConsoleKeyInfo input = Console.ReadKey();
                         newPosition = InputCheck(input.Key);
-                    
                     }
                     else
                     {
-                        newPosition = 
+                        newPosition =
                             bStar.GetNextStepTowards(a.position, b.position);
                     }
 
-                    if(a as Human != null) 
+                    if (a as Human != null)
                         (a as Human).Action(board.realBoard, newPosition);
                     else if (a as Zombie != null)
                         (a as Zombie).Action(board.realBoard, newPosition, board);
@@ -134,7 +121,7 @@ namespace lp1_project2
                 else if (board.GetHumanCount() == 0)
                 {
                     Console.WriteLine($"Zombies Win!! Won in: " +
-                        $"{totalTurns - board.Turns}");
+                        $"{totalTurns - board.Turns} turns");
                     break;
                 }
                 // Decrement turns and wait 1 second for next turn.
@@ -185,55 +172,55 @@ namespace lp1_project2
 
             // WAXD for cardinal directions
             // Q E and Z C for diagonals
-            switch(input)
+            switch (input)
             {
                 // Right
                 case ConsoleKey.D:
-                p.X = 1;
-                break;
-                            
+                    p.X = 1;
+                    break;
+
                 // Left
                 case ConsoleKey.A:
-                p.X = -1;
-                break;
+                    p.X = -1;
+                    break;
 
                 // Down
                 case ConsoleKey.X:
-                p.Y = 1;
-                break;
+                    p.Y = 1;
+                    break;
 
                 // Up
                 case ConsoleKey.W:
-                p.Y = -1;
-                break;
+                    p.Y = -1;
+                    break;
 
                 // Top-Left
                 case ConsoleKey.Q:
-                p.X = -1;
-                p.Y = -1;
-                break;
+                    p.X = -1;
+                    p.Y = -1;
+                    break;
 
                 // Top-Right
                 case ConsoleKey.E:
-                p.X = 1;
-                p.Y = -1;
-                break;
+                    p.X = 1;
+                    p.Y = -1;
+                    break;
 
                 // Bottom-Left
                 case ConsoleKey.Z:
-                p.X = -1;
-                p.Y = 1;
-                break;
+                    p.X = -1;
+                    p.Y = 1;
+                    break;
 
                 // Bottom-Right
                 case ConsoleKey.C:
-                p.X = 1;
-                p.Y = 1;
-                break;
+                    p.X = 1;
+                    p.Y = 1;
+                    break;
 
                 default:
-                Console.WriteLine("Invalid input");
-                break;
+                    Console.WriteLine("Invalid input");
+                    break;
             }
 
             Console.Write($"{input}, goes {p}");

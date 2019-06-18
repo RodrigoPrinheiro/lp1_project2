@@ -10,7 +10,7 @@ namespace lp1_project2
     class Human : Agent, IBoardActionable
     {
 
-        public Human(byte tag, Position position, bool input) : 
+        public Human(byte tag, Position position, bool input) :
             base(tag, input, Faction.Human)
         {
             this.position = position;
@@ -46,7 +46,7 @@ namespace lp1_project2
                 }
 
             }
-            else if(!InputControlled)
+            else if (!InputControlled)
             {
                 // Check bounds, send the agent around if bounds are going to be
                 // crossed
@@ -66,7 +66,7 @@ namespace lp1_project2
 
             }
 
-            
+
         }
 
         public override string ToString()

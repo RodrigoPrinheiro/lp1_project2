@@ -19,7 +19,7 @@ namespace lp1_project2
         }
 
         public override string ToString() => $"Position: ({this.X},{this.Y})";
- 
+
         public static Position operator +(Position p1, Position p2)
         {
             Position temp = new Position();

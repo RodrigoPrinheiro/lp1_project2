@@ -8,7 +8,7 @@ namespace lp1_project2
         /// <summary>
         /// tile's position
         /// </summary>
-        private Position boardPos {get;}
+        private Position boardPos { get; }
 
         /// <summary>
         /// Current agent that is on this tile.
@@ -18,7 +18,7 @@ namespace lp1_project2
         public Tile(int x, int y)
         {
             occupier = null;
-            boardPos = new Position(x,y);
+            boardPos = new Position(x, y);
         }
 
         public override string ToString()

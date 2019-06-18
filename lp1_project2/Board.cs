@@ -12,16 +12,10 @@ namespace lp1_project2
     {
         public int Turns { get; set; }
         // Width and Height of the real board, shown on screen.
-        public int Width {get; private set;}
-        public int Height {get; private set;}
-        public Tile[,] realBoard {get; private set;}
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public Tile[,] realBoard { get; private set; }
 
-        // Dictionary that stores each agent on either faction as keys
-        // and then its 5 positions (its real positions and 4 simulated ones)
-        // as values for each agent
-
-        List<Human> humansList;
-        List<Zombie> zombiesList;
         public List<Agent> agentsList;
 
         /// <summary>
@@ -48,23 +42,20 @@ namespace lp1_project2
             Height = height;
 
             Turns = turns;
-
-            humansList = new List<Human>();
-            zombiesList = new List<Zombie>();
             agentsList = new List<Agent>();
 
             realBoard = new Tile[width, height];
-            for(int x = 0; x < realBoard.GetLength(0); x++)
+            for (int x = 0; x < realBoard.GetLength(0); x++)
             {
-                for(int y = 0; y < realBoard.GetLength(1); y++)
+                for (int y = 0; y < realBoard.GetLength(1); y++)
                 {
 
-                    realBoard[x,y] = new Tile(x,y);
-                }     
+                    realBoard[x, y] = new Tile(x, y);
+                }
             }
             // Make the agent list
             agentsList.AddRange(MakeAgentList<Zombie>(nZ, controllableZ));
-            agentsList.AddRange(MakeAgentList<Human>(nH, controllableH));   
+            agentsList.AddRange(MakeAgentList<Human>(nH, controllableH));
 
             // Populate the Tiles
             PopulateTiles();
@@ -85,28 +76,28 @@ namespace lp1_project2
 
             int ctrlCounter = 0;
             int counter = 0;
-            while(counter < n)
+            while (counter < n)
             {
 
-                newPos.X = rX.Next(0,realBoard.GetLength(0));
+                newPos.X = rX.Next(0, realBoard.GetLength(0));
                 newPos.Y = rY.Next(0, realBoard.GetLength(1));
 
-                if(realBoard[newPos.X, newPos.Y].occupier == null)
+                if (realBoard[newPos.X, newPos.Y].occupier == null)
                 {
-                    if (typeof(T).Equals(typeof(Human))) 
+                    if (typeof(T).Equals(typeof(Human)))
                     {
-                        yield return 
+                        yield return
                             new Human(
-                                (byte)rX.Next(), 
+                                (byte)rX.Next(),
                                 newPos,
                                 ctrlCounter < inputCtrl) as T;
                     }
 
-                    else if(typeof(T).Equals(typeof(Zombie)))
+                    else if (typeof(T).Equals(typeof(Zombie)))
                     {
-                        yield return 
+                        yield return
                             new Zombie(
-                                (byte)rX.Next(), 
+                                (byte)rX.Next(),
                                 newPos,
                                 ctrlCounter < inputCtrl) as T;
 
@@ -116,7 +107,7 @@ namespace lp1_project2
                 }
 
                 ctrlCounter++;
-                counter ++;
+                counter++;
 
             }
         }
@@ -126,10 +117,10 @@ namespace lp1_project2
         /// </summary>
         public void PopulateTiles()
         {
-            foreach(Agent a in agentsList)
+            foreach (Agent a in agentsList)
             {
                 //Place them on tiles on the real board
-                realBoard[a.position.X,a.position.Y].occupier = a;
+                realBoard[a.position.X, a.position.Y].occupier = a;
             }
         }
 
@@ -137,7 +128,7 @@ namespace lp1_project2
         ///  Replace Human with Zombie on board
         /// </summary>
         /// <param name="h">Human to zombify</param>
-        public void ConvertHuman(Human h) 
+        public void ConvertHuman(Human h)
         {
             agentsList.Remove(h);
             agentsList.Add(new Zombie(h.Tag, h.position, false));
