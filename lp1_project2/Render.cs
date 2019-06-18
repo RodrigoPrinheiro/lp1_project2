@@ -47,6 +47,8 @@ namespace lp1_project2
                 {
                     if (board[j, i].occupier != null)
                     {
+                        if (board[j, i].occupier.InputControlled)
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
                         if (board[j, i].occupier == currentAgent)
                             Console.BackgroundColor = ConsoleColor.DarkGray;
                         PickConsoleForeground(board[j, i].occupier);
