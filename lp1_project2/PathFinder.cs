@@ -69,27 +69,30 @@ namespace lp1_project2
             // movement
             Position nextStep = new Position(0,0);
 
-            int deltaX = target.X - origin.X;
-            int deltaY = target.Y - origin.Y;
+            int dx = target.X - origin.X;
+            int dy = target.Y - origin.Y;
+
+            if (dx > mapXSize / 2) dx = mapXSize - dx;
+            if (dy > mapYSize / 2) dy = mapXSize - dy;
 
             // First verify whether the difference in positions is 
             // greater on the X or Y axis.
             // Then check if the target is lower/higher/forwards/backwards
-            if (MathF.Pow(deltaX, 2) > MathF.Pow(deltaY, 2))
+            if (MathF.Pow(dx, 2) > MathF.Pow(dy, 2))
             {
-                if (deltaX > 0) nextStep.X = 1;
-                else if (deltaX < 0) nextStep.X = -1;
+                if (dx > 0) nextStep.X = 1;
+                else if (dx < 0) nextStep.X = -1;
             }
-            else if (MathF.Pow(deltaY, 2) > MathF.Pow(deltaX, 2))
+            else if (MathF.Pow(dy, 2) > MathF.Pow(dx, 2))
             {
-                if (deltaY > 0) nextStep.Y = 1;
-                else if (deltaY < 0) nextStep.Y = -1;
+                if (dy > 0) nextStep.Y = 1;
+                else if (dy < 0) nextStep.Y = -1;
             }
 
            // If the difference in the X and Y axis are the same, 
-           // move diagonaly
+           // move diagonally
            // use CompareTo do decide what direction in specific.
-           else if ((int)MathF.Pow(deltaX, 2) == (int)MathF.Pow(deltaY, 2))
+           else if ((int)MathF.Pow(dx, 2) == (int)MathF.Pow(dy, 2))
            {
                nextStep.X = 1 * target.X.CompareTo(origin.X);
                nextStep.Y = 1 * target.Y.CompareTo(origin.Y);

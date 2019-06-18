@@ -26,24 +26,12 @@ namespace lp1_project2
             gameSaver = new SaveFileManager
                 (Console.ReadLine().Equals("Y") ? true : false);
 
-            foreach (string s in args)
-            {
-                Console.WriteLine($"{s} ");
-            }
-
             //gameSaver.ReadSave(saveBoard);
             if (!gameSaver.UsingSave)
             {
                 BuildBoard(args);
 
             }
-            //else
-            //{
-            //    if (saveBoard.GameBoard != null)
-            //        board = saveBoard.GameBoard;
-            //    else
-            //        BuildBoard(args);
-            //}
 
             bStar = new PathFinder(board.Width, board.Height);
         }
@@ -72,6 +60,7 @@ namespace lp1_project2
         /// </summary>
         public void Run()
         {
+            MainMenu.Menu();
             Continue();
             GameLoop();
         }
@@ -95,12 +84,17 @@ namespace lp1_project2
                 // go down the turn order
                 foreach(Agent a in turnOrder)
                 {
+                    // No use searching for enemies if one side is all dead
                     if (board.GetHumanCount() == 0) break;
+                  
+                    Agent b = bStar.GetNearest(board.agentsList, a);
 
+
+
+                    GameRender(a);
                     Position newPosition = new Position();
                     if(a.InputControlled) 
                     {
-                        GameRender(a);
                         Console.WriteLine("Input Movement:");
                         ConsoleKeyInfo input = Console.ReadKey();
                         newPosition = InputCheck(input.Key);
@@ -108,10 +102,8 @@ namespace lp1_project2
                     }
                     else
                     {
-                        Agent b = bStar.GetNearest(board.agentsList, a);
                         newPosition = 
                             bStar.GetNextStepTowards(a.position, b.position);
-                        
                     }
 
                     if(a as Human != null) 
@@ -120,7 +112,8 @@ namespace lp1_project2
                         (a as Zombie).Action(board.realBoard, newPosition, board);
 
                     GameRender(a);
-
+                    Console.WriteLine($"Closest NPC: {b}");
+                    Continue();
                 }
 
                 
@@ -140,7 +133,7 @@ namespace lp1_project2
         {
             Console.Clear();
             Render.Board(board.realBoard, currentAgent);
-            Console.WriteLine($"Current NPC moving: {currentAgent.Tag}");
+            Console.WriteLine($"Current NPC moving: {currentAgent}");
 
             if (currentAgent.InputControlled)
             {
