@@ -84,7 +84,11 @@ namespace lp1_project2
                 // go down the turn order
                 foreach(Agent a in turnOrder)
                 {
+                    // No use searching for enemies if one side is all dead
+                    if (board.GetHumanCount() == 0) break;
+                  
                     Agent b = bStar.GetNearest(board.agentsList, a);
+
 
 
                     GameRender(a);
@@ -112,11 +116,12 @@ namespace lp1_project2
                     Continue();
                 }
 
-                board.Turns--;
+                
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
                 else if (board.Turns <= 0) break;
                 else if (board.GetHumanCount() == 0) break;
+                board.Turns--;
             }
         }
 
