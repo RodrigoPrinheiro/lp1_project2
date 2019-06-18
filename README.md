@@ -20,13 +20,14 @@ vários *bugs* que foram surgindo ao longo do projeto. Embora a solução origin
 realizada pelo Rafael não tenha sido a final, grande parte do código foi reutilizável,
 nas classes `Pathfinder`, `Board` e `Tile`. Por sentido de utilidade criou dois *overloads*
 de operadores para a `struct` `Position` criada pelo colega Rodrigo Pinheiro.
-Também criou a interface `ÌBoardActionable` e a sua implementação devida.
+Também criou a interface `ÌBoardActionable` e a sua implementação devida, assim como para uso nesta
+a função de input das direções do jogador.
 
 * Rodrigo Pinheiro: Realizou em conjunto com o Rafael a arquitetura base do projeto,
 criou a base para as classes `Agent` e as suas estendidas, `Render`, `Game`, `Shuffle`. 
 Criou o sistema de *tags* e resolveu vários problemas quanto ao tabuleiro toroidal
 em conjunto com o Rafael. Para alem destes tentou criar o sistema de *save files* sem sucesso.
-Escreveu o Relatório.
+Escreveu o Relatório e configurou a *doxyfile* para a criação de documentação.
 
 #### Descrição da Solução
 
@@ -67,7 +68,7 @@ ciclos `while` e `switch`.
 O repositório usado foi [este][rep] original do aluno Rodrigo Pinheiro.
 
 [#img1]:ClassDiagram.png
-[#img2]:
+[#img2]:GameDiagram.png
 [#ref1]:https://jamesshinevar.com/2017/05/28/shuffle-a-list-c-fisher-yates-shuffle/
 [#ref2]:https://stackoverflow.com/questions/11150332/how-to-change-foreground-color-of-each-letter-in-a-string-in-c-sharp-console
 [#ref3]:https://docs.microsoft.com/en-us/dotnet/standard/serialization/serialization-guidelines
