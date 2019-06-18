@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading;
 
 
 namespace lp1_project2
@@ -14,7 +14,7 @@ namespace lp1_project2
         private PathFinder bStar;
         private SaveFileManager gameSaver;
         private List<Agent> turnOrder;
-
+        private int totalTurns;
         
 
         public Game(string[] args)
@@ -30,7 +30,7 @@ namespace lp1_project2
             if (!gameSaver.UsingSave)
             {
                 BuildBoard(args);
-
+                totalTurns = GetValueFromArgs(args, 't');
             }
 
             bStar = new PathFinder(board.Width, board.Height);
@@ -63,6 +63,8 @@ namespace lp1_project2
             MainMenu.Menu();
             Continue();
             GameLoop();
+
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -109,14 +111,32 @@ namespace lp1_project2
 
                     GameRender(a);
                     Console.WriteLine($"Closest NPC: {b}");
-                    Continue();
+                    Thread.Sleep(500);
                 }
 
+                Console.WriteLine();
+                Console.WriteLine("Press <escape> any time to leave...");
+
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine("Left the game...");
+                    break;
+                }
+                else if (board.Turns <= 0)
+                {
+                    Console.WriteLine("Humans Win!!");
+                    break;
+                }
+                else if (board.GetHumanCount() == 0)
+                {
+                    Console.WriteLine($"Zombies Win!! Won in: " +
+                        $"{totalTurns - board.Turns}");
+                    break;
+                }
+
+                // Decrement turns and wait 1 second for next turn.
                 board.Turns--;
-                Continue();
-                if (Console.ReadKey().Key == ConsoleKey.Escape) break;
-                else if (board.Turns <= 0) break;
-                else if (board.GetHumanCount() == 0) break;
+                Thread.Sleep(1000);
             }
         }
 
