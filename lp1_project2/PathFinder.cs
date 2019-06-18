@@ -63,15 +63,13 @@ namespace lp1_project2
         /// <returns></returns>
         public Position GetNextStepTowards(Position origin, Position target)
         {
-
-            // Will be used as the return. 
-            // Adding the x and y of this to the origin should work to get
-            // movement
+            // Returned Position
             Position nextStep = new Position(0,0);
 
             int dx = target.X - origin.X;
             int dy = target.Y - origin.Y;
 
+            // Toroidal distance
             if (dx > mapXSize / 2) dx = mapXSize - dx;
             if (dy > mapYSize / 2) dy = mapXSize - dy;
 
@@ -98,10 +96,7 @@ namespace lp1_project2
                nextStep.Y = 1 * target.Y.CompareTo(origin.Y);
            }
 
-            // Oh? You approaching me?
-            // Instead of running away you're coming right towards me?
             return nextStep;
-
         }
 
         /// <summary>
