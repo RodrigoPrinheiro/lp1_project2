@@ -95,7 +95,7 @@ namespace lp1_project2
                 // go down the turn order
                 foreach(Agent a in turnOrder)
                 {
-                    
+                    if (board.GetHumanCount() == 0) break;
 
                     Position newPosition = new Position();
                     if(a.InputControlled) 
@@ -123,11 +123,12 @@ namespace lp1_project2
 
                 }
 
-                board.Turns--;
+                
                 Continue();
                 if (Console.ReadKey().Key == ConsoleKey.Escape) break;
                 else if (board.Turns <= 0) break;
                 else if (board.GetHumanCount() == 0) break;
+                board.Turns--;
             }
         }
 
