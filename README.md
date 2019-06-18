@@ -9,7 +9,7 @@
 
 
 #### Participação
-* A participação geral do grupo foi equilibrada entre o Rafael castro e Silva Silva e o Rodrigo
+* A participação geral do grupo foi equilibrada entre o Rafael Castro e Silva e o Rodrigo
 Pinheiro, enquanto o Rodrigo Marques acompanhou o projeto de forma mais leve.
 
 * Rodrigo Marques: Criou a classe `MainMenu` e foi o autor dos dois diagramas
