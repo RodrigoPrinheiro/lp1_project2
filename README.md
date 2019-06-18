@@ -11,6 +11,8 @@
 #### Participação
 * A participação geral do grupo foi equilibrada entre o Rafael Silva e o Rodrigo
 Pinheiro, enquanto o Rodrigo Marques acompanhou o projeto de forma mais leve.
+Para alem disto o grupo considerou que a solução tornou-se um pouco confusa para
+o que o problema era.
 
 * Rodrigo Marques: Criou a classe `MainMenu` e foi o autor dos dois diagramas
 apresentados no trabalho.
@@ -43,12 +45,27 @@ mais próximo e da direção da casa a andar.
 
 ##### Assim Sendo o UML das classes que compõem o programa é o seguinte:
 
-![DiagramaUML]
+![DiagramaUML][#img1]
 
+##### Diagrama do Ciclo principal do jogo:
+
+![DiagramaCiclo][#img2]
+
+#### Referências
+1. [Shuffle Fisher Yates][#ref1]
+2. [Visuais de consola][#ref2]
+3. [Serialização de objetos][#ref3]
+4. Alguma da lógica do tabuleiro em si foi retirada do primeiro projeto
+5. [Site para visualizar a acada 5 segundos][#ref4]
 #### [Repositório utilizado][rep]
 
 
-
+[#img1]:ClassDiagram.png
+[#img2]:
+[#ref1]:https://jamesshinevar.com/2017/05/28/shuffle-a-list-c-fisher-yates-shuffle/
+[#ref2]:https://stackoverflow.com/questions/11150332/how-to-change-foreground-color-of-each-letter-in-a-string-in-c-sharp-console
+[#ref3]:https://docs.microsoft.com/en-us/dotnet/standard/serialization/serialization-guidelines
+[#ref4]:https://en.wikipedia.org/wiki/KISS_principle
 [rep]:(https://github.com/RodrigoPrinheiro/lp1_project2)
 [Rodrigo Marques]:https://github.com/RodrigoMarques23
 [Rafael Castro e Silva]:https://github.com/RafaelCS-Aula
